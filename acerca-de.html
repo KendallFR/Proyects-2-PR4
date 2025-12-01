@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Acerca de - EcoCampusCR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/sky.css">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+  
+  <style>
+    /* Comportamiento de sesión - solo lo esencial que Tailwind no puede hacer dinámicamente */
+    #userSession.active {
+      display: flex !important;
+    }
+    
+    #loginPrompt.hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen relative overflow-x-hidden">
+
+<!-- Fondos animados  -->
+<div class="sky-layer sky-day dark:hidden">
+  <div class="cloud large" style="top: 10%; left: -10%; animation-delay: 0s;"></div>
+  <div class="cloud medium" style="top: 25%; left: 40%; animation-delay: 8s;"></div>
+  <div class="cloud small" style="top: 50%; left: 10%; animation-delay: 15s;"></div>
+  <div class="cloud medium" style="top: 65%; left: 70%; animation-delay: 22s;"></div>
+</div>
+
+<div class="sky-layer sky-night hidden dark:block">
+  <span class="star" style="top: 10%; left: 20%; animation-delay: 0s;"></span>
+  <span class="star" style="top: 18%; left: 70%; animation-delay: 1s;"></span>
+  <span class="star" style="top: 35%; left: 40%; animation-delay: 2.5s;"></span>
+  <span class="star" style="top: 55%; left: 15%; animation-delay: 1.8s;"></span>
+  <span class="star" style="top: 65%; left: 75%; animation-delay: 3.2s;"></span>
+  <span class="star" style="top: 80%; left: 50%; animation-delay: 0.7s;"></span>
+  
+  <div class="shooting-star" style="top: 25%; left: 5%; animation-delay: 0s;"></div>
+  <div class="shooting-star" style="top: 60%; left: -10%; animation-delay: 2.5s;"></div>
+</div>
+
+
+ <!-- Header -->
+<header class="border-b border-slate-200 dark:border-emerald-800/60 
+        bg-white/70 dark:bg-slate-950/70 sticky top-0 z-20 backdrop-blur-md">
+  <div class="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+
+    <!-- Logo -->
+    <div class="flex items-center gap-2">
+      <div class="h-8 w-8 rounded-full bg-emerald-500/80 flex items-center justify-center text-slate-950 font-bold text-lg">
+        ♻️
+      </div>
+      <div>
+        <h1 class="text-lg font-semibold text-emerald-700 dark:text-emerald-100 leading-none">
+          EcoCampus<span class="text-emerald-500">CR</span>
+        </h1>
+        <p class="text-[10px] text-emerald-700/70 dark:text-emerald-200/70 mt-[1px]">
+          Convierte tu reciclaje en recompensas
+        </p>
+      </div>
+    </div>
+
+    <!-- Navegación escritorio -->
+    <nav class="hidden md:flex items-center gap-5 text-sm font-medium">
+      <a href="index.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
+      <a href="acerca-de.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
+      <a href="contacto.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
+      <a href="#como-funciona" class="hover:text-emerald-500 dark:hover:text-emerald-300">¿Cómo funciona?</a>
+      <a href="#impacto" class="hover:text-emerald-500 dark:hover:text-emerald-300">Impacto</a>
+      <a href="#eventos" class="hover:text-emerald-500 dark:hover:text-emerald-300">Eventos</a>
+      <a href="#faq" class="hover:text-emerald-500 dark:hover:text-emerald-300">FAQ</a>
+      <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
+    </nav>
+
+    <!-- Derecha -->
+    <div class="flex items-center gap-2">
+
+      <!-- Sesión usuario -->
+      <div id="userSession"
+        class="hidden md:flex items-center gap-2 bg-emerald-100/40 dark:bg-emerald-900/20 
+               px-2.5 py-1.5 rounded-full backdrop-blur-sm border border-emerald-300/40 dark:border-emerald-700/40">
+        
+        <span id="userSessionName" class="text-sm font-semibold text-emerald-800 dark:text-emerald-100"></span>
+
+        <span id="userSessionPoints"
+              class="text-[11px] px-2 py-0.5 rounded-full bg-white/70 dark:bg-slate-800/70 
+                     text-emerald-700 dark:text-emerald-300 font-semibold">
+          🌱 0
+        </span>
+
+        <button id="btnLogoutNav"
+                class="text-[11px] px-2.5 py-1 rounded-full bg-red-500 text-white 
+                       hover:bg-red-600 transition font-semibold">
+          Salir
+        </button>
+      </div>
+
+      <!-- Login -->
+      <div id="loginPrompt">
+        <a href="autenticacion.html"
+           class="hidden md:inline-block text-sm px-4 py-1.5 rounded-full bg-emerald-500 
+                  text-slate-950 font-semibold hover:bg-emerald-400 transition">
+          Iniciar Sesión
+        </a>
+      </div>
+
+      <!-- Botón tema -->
+      <button id="theme-toggle"
+              class="p-2 rounded-full border border-slate-300 dark:border-slate-600 
+                     hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+        <span id="theme-toggle-light" class="hidden">☀️</span>
+        <span id="theme-toggle-dark">🌙</span>
+      </button>
+
+      <!-- Hamburguesa -->
+      <button id="menu-toggle"
+              class="md:hidden p-2 rounded-full border border-slate-300 dark:border-slate-600 
+                     hover:bg-slate-100 dark:hover:bg-slate-800 transition text-lg">
+        ☰
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Menú móvil -->
+  <div id="mobile-menu"
+       class="md:hidden hidden border-t border-slate-200 dark:border-emerald-800/60 
+              bg-white/95 dark:bg-slate-950/95 shadow-lg">
+    
+
+
+    <nav class="px-4 py-3 flex flex-col gap-2 text-sm">
+      <a href="index.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
+      <a href="acerca-de.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
+      <a href="contacto.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
+      <a href="#como-funciona" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">¿Cómo funciona?</a>
+      <a href="#impacto" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Impacto</a>
+      <a href="#eventos" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Eventos</a>
+      <a href="#faq" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">FAQ</a>
+      <a href="blog.html" class="py-1 rounded-md bg-emerald-50 dark:bg-slate-800 px-2">Publicaciones</a>
+
+      <a href="autenticacion.html"
+         id="loginPromptMobile"
+         class="mt-2 text-center text-sm px-4 py-2 rounded-full border border-emerald-500 
+                text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/10 transition">
+        Iniciar sesión
+      </a>
+    </nav>
+  </div>
+</header>
+
+
+
+<!-- Main Content -->
+<main class="max-w-6xl mx-auto px-4 py-10">
+  
+  <!-- Sección Contexto -->
+  <section class="mb-16">
+    <div class="bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-emerald-800/60 rounded-2xl p-6 md:p-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-emerald-700 dark:text-emerald-100 mb-4">
+        Contexto del Proyecto
+      </h2>
+      <p class="text-sm md:text-base text-emerald-700/80 dark:text-emerald-200/80 mb-8">
+        Eco-Puntos nace como respuesta a la problemática de gestión de residuos en campus universitarios de
+        Latinoamérica, utilizando la gamificación como herramienta para promover la separación en la fuente y la
+        cultura Basura Cero.
+      </p>
+
+      <!-- Grid de contexto -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="contextoGrid">
+        <!-- Los items se insertarán dinámicamente -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Institución -->
+  <section class="mb-16">
+    <div class="bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-emerald-800/60 rounded-2xl p-6 md:p-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-emerald-700 dark:text-emerald-100 mb-6 text-center">
+        Universidad Técnica Nacional
+      </h2>
+      <p class="text-sm md:text-base text-emerald-700/80 dark:text-emerald-200/80 max-w-3xl mx-auto text-center">
+        La Universidad Técnica Nacional, Sede Central Alajuela, es el hogar del proyecto Eco-Puntos.
+        Como institución comprometida con la sostenibilidad y la innovación tecnológica, apoyamos
+        iniciativas que promuevan el cuidado ambiental y el desarrollo de soluciones digitales para
+        problemas reales de nuestra comunidad.
+      </p>
+    </div>
+  </section>
+
+  <!-- Sección Equipo -->
+  <section class="mb-16">
+    <h2 class="text-2xl md:text-3xl font-bold text-emerald-700 dark:text-emerald-100 mb-8 text-center">
+      Nuestro Equipo
+    </h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 max-w-4xl mx-auto" id="teamGrid">
+      <!-- Los miembros del equipo se insertarán dinámicamente -->
+    </div>
+
+    <div class="text-center">
+      <button class="px-8 py-3 rounded-full bg-emerald-500 text-slate-950 font-bold text-sm hover:bg-emerald-400 transition shadow-lg shadow-emerald-500/40" id="btnVerMas">
+        Ver Más Información
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="border-t border-slate-200 dark:border-emerald-800/60 bg-slate-100 dark:bg-slate-900/80 py-6 text-center mt-16">
+  <p class="text-xs text-emerald-700/80 dark:text-emerald-200/70">
+    &copy; 2025 Eco-Puntos | Universidad Técnica Nacional
+  </p>
+</footer>
+
+<!-- Scripts -->
+<script src="JS/sesion.js"></script>
+<script src="JS/sesion-navbar.js"></script>
+<script src="json/data.js"></script>
+<script src="JS/theme.js"></script>
+
+<script>
+// ========================================
+// MENÚ MÓVIL - Toggle
+// ========================================
+const menuToggle = document.getElementById('menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+
+if (menuToggle && mobileMenu) {
+  menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Cerrar menú cuando se haga clic en un enlace
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+    });
+  });
+}
+
+// ========================================
+// CARGAR CONTEXTO
+// ========================================
+const contextoGrid = document.getElementById('contextoGrid');
+if (typeof contextoData !== 'undefined') {
+  contextoData.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-emerald-700/40 rounded-xl p-6 text-center hover:transform hover:-translate-y-1 hover:shadow-xl transition-all duration-300 cursor-pointer';
+    div.innerHTML = `
+      <div class="text-5xl mb-4">${item.icono}</div>
+      <h3 class="text-lg font-semibold text-emerald-800 dark:text-emerald-100 mb-2">${item.titulo}</h3>
+      <p class="text-sm text-emerald-700/80 dark:text-emerald-200/80">${item.descripcion}</p>
+    `;
+    contextoGrid.appendChild(div);
+  });
+}
+
+// ========================================
+// CARGAR EQUIPO
+// ========================================
+const teamGrid = document.getElementById('teamGrid');
+if (typeof teamData !== 'undefined') {
+  teamData.forEach(member => {
+    const card = document.createElement('div');
+    card.className = 'bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-emerald-800/60 rounded-2xl overflow-hidden hover:transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300';
+    card.innerHTML = `
+      <div class="h-64 bg-slate-200 dark:bg-slate-800 flex items-center justify-center border-b-4 border-emerald-500 relative overflow-hidden">
+        <img src="${member.foto}" alt="${member.nombre}" 
+             class="w-40 h-40 rounded-full object-cover border-4 border-emerald-500 shadow-xl" 
+             onerror="this.src='https://via.placeholder.com/250?text=${encodeURIComponent(member.nombre.split(' ')[0])}'"/>
+      </div>
+      <div class="p-6">
+        <h3 class="text-lg font-semibold text-emerald-800 dark:text-emerald-100 mb-1">${member.nombre}</h3>
+        <p class="text-xs text-emerald-700/80 dark:text-emerald-200/80 mb-4 break-words">${member.email}</p>
+        <div class="additional-details opacity-0 max-h-0 overflow-hidden transition-all duration-500">
+          <div class="pt-4 border-t border-slate-300 dark:border-emerald-700/40 space-y-2">
+            <h4 class="text-sm font-semibold text-emerald-800 dark:text-emerald-100 mb-3">Información adicional</h4>
+            <p class="text-xs text-emerald-700/80 dark:text-emerald-200/80">
+              <strong class="text-emerald-800 dark:text-emerald-100">Rol:</strong> ${member.descripcion}
+            </p>
+            <p class="text-xs text-emerald-700/80 dark:text-emerald-200/80">
+              <strong class="text-emerald-800 dark:text-emerald-100">Cédula:</strong> ${member.cedula}
+            </p>
+            <p class="text-xs text-emerald-700/80 dark:text-emerald-200/80">
+              <strong class="text-emerald-800 dark:text-emerald-100">Carrera:</strong> ${member.carrera}
+            </p>
+            <p class="text-xs text-emerald-700/80 dark:text-emerald-200/80">
+              <strong class="text-emerald-800 dark:text-emerald-100">Institución:</strong> ${member.institucion}
+            </p>
+            <p class="text-xs text-emerald-700/80 dark:text-emerald-200/80">
+              <strong class="text-emerald-800 dark:text-emerald-100">Año/Ciclo:</strong> ${member.anio_ciclo}
+            </p>
+            <p class="text-xs text-emerald-700/80 dark:text-emerald-200/80">
+              <strong class="text-emerald-800 dark:text-emerald-100">Curso:</strong> ${member.curso}
+            </p>
+            ${member.github ? `
+              <div class="mt-3 pt-3 border-t border-slate-300 dark:border-emerald-700/40">
+                <a href="${member.github}" target="_blank" 
+                   class="inline-flex items-center gap-2 text-xs text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition">
+                  <i class="fab fa-github"></i>
+                  <span>Ver perfil de GitHub</span>
+                </a>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+    teamGrid.appendChild(card);
+  });
+}
+
+// ========================================
+// BOTÓN VER MÁS
+// ========================================
+const btnVerMas = document.getElementById('btnVerMas');
+let showingMore = false;
+btnVerMas.addEventListener('click', () => {
+  const details = document.querySelectorAll('.additional-details');
+  showingMore = !showingMore;
+  
+  details.forEach(detail => {
+    if (showingMore) {
+      detail.classList.remove('opacity-0', 'max-h-0');
+      detail.classList.add('opacity-100', 'max-h-96');
+    } else {
+      detail.classList.remove('opacity-100', 'max-h-96');
+      detail.classList.add('opacity-0', 'max-h-0');
+    }
+  });
+  
+  btnVerMas.textContent = showingMore ? 'Ver Menos Información' : 'Ver Más Información';
+});
+</script>
+
+</body>
+</html>

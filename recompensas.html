@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Recompensas - EcoCampusCR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/sky.css">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+  
+  <style>
+    #userSession.active {
+      display: flex !important;
+    }
+    
+    #loginPrompt.hidden {
+      display: none !important;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reward-card {
+      animation: slideInUp 0.5s ease-out;
+    }
+
+    .modal {
+      animation: slideInUp 0.3s ease-out;
+    }
+
+    .pulse-success {
+      animation: pulse-success 0.6s ease-out;
+    }
+
+    @keyframes pulse-success {
+      0% {
+        transform: scale(0.95);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen relative overflow-x-hidden">
+
+<!-- Fondos animados -->
+<div class="sky-layer sky-day dark:hidden">
+  <div class="cloud large" style="top: 10%; left: -10%; animation-delay: 0s;"></div>
+  <div class="cloud medium" style="top: 25%; left: 40%; animation-delay: 8s;"></div>
+  <div class="cloud small" style="top: 50%; left: 10%; animation-delay: 15s;"></div>
+  <div class="cloud medium" style="top: 65%; left: 70%; animation-delay: 22s;"></div>
+</div>
+
+<div class="sky-layer sky-night hidden dark:block">
+  <span class="star" style="top: 10%; left: 20%; animation-delay: 0s;"></span>
+  <span class="star" style="top: 18%; left: 70%; animation-delay: 1s;"></span>
+  <span class="star" style="top: 35%; left: 40%; animation-delay: 2.5s;"></span>
+  <span class="star" style="top: 55%; left: 15%; animation-delay: 1.8s;"></span>
+  <span class="star" style="top: 65%; left: 75%; animation-delay: 3.2s;"></span>
+  <span class="star" style="top: 80%; left: 50%; animation-delay: 0.7s;"></span>
+  
+  <div class="shooting-star" style="top: 25%; left: 5%; animation-delay: 0s;"></div>
+  <div class="shooting-star" style="top: 60%; left: -10%; animation-delay: 2.5s;"></div>
+</div>
+
+<!-- Header -->
+<header class="border-b border-slate-200 dark:border-emerald-800/60 bg-white/80 dark:bg-slate-950/80 sticky top-0 z-20 backdrop-blur">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+    <!-- Logo -->
+    <div class="flex items-center gap-2">
+      <div class="h-8 w-8 rounded-full bg-emerald-500/80 flex items-center justify-center text-slate-950 font-bold text-lg">
+        ♻️
+      </div>
+      <div>
+        <h1 class="text-lg font-semibold text-emerald-700 dark:text-emerald-100">
+          EcoCampus<span class="text-emerald-500">CR</span>
+        </h1>
+        <p class="text-xs text-emerald-700/80 dark:text-emerald-200/80">
+          Convierte tu reciclaje en recompensas.
+        </p>
+      </div>
+    </div>
+
+    <!-- Navegación escritorio -->
+    <nav class="hidden md:flex items-center gap-6 text-sm">
+      <a href="index.html" class="hover:text-emerald-500 dark:hover:text-emerald-300 transition">Inicio</a>
+      <a href="acerca-de.html" class="hover:text-emerald-500 dark:hover:text-emerald-300 transition">Acerca de</a>
+      <a href="dashboard-estudiante.html" class="hover:text-emerald-500 dark:hover:text-emerald-300 transition">Dashboard</a>
+      <a href="recompensas.html" class="text-emerald-600 dark:text-emerald-400 font-semibold">Recompensas</a>
+    </nav>
+
+    <!-- Área derecha -->
+    <div class="flex items-center gap-2">
+      <div class="hidden md:flex items-center gap-2 md:gap-3 bg-emerald-100/50 dark:bg-emerald-900/20 px-3 py-2 rounded-full backdrop-blur-sm" id="userSession">
+        <span class="text-sm font-semibold text-emerald-800 dark:text-emerald-100 whitespace-nowrap" id="userSessionName"></span>
+        <span class="text-xs px-3 py-1 rounded-full bg-white/80 dark:bg-slate-800/80 text-emerald-700 dark:text-emerald-300 font-semibold whitespace-nowrap" id="userSessionPoints">🌱 0</span>
+        <button class="text-xs px-3 py-1.5 rounded-full bg-red-500 text-white hover:bg-red-600 transition font-semibold whitespace-nowrap" id="btnLogoutNav">Salir</button>
+      </div>
+
+      <div id="loginPrompt">
+        <a href="autenticacion.html" class="hidden md:inline-block text-sm px-4 py-2 rounded-full bg-emerald-500 text-slate-950 font-semibold hover:bg-emerald-400 transition whitespace-nowrap">
+          Iniciar Sesión
+        </a>
+      </div>
+
+      <!-- Botón tema -->
+      <button id="theme-toggle"
+              class="p-2 rounded-full border border-slate-300 dark:border-slate-600 
+                     hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+        <span id="theme-toggle-light" class="hidden">☀️</span>
+        <span id="theme-toggle-dark">🌙</span>
+      </button>
+
+      <!-- Botón hamburguesa (solo móvil) -->
+      <button id="menu-toggle"
+              class="md:hidden p-2 rounded-full border border-slate-300 dark:border-slate-600 
+                     hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+        ☰
+      </button>
+    </div>
+  </div>
+
+<!-- Menú móvil -->
+<div id="mobile-menu"
+     class="md:hidden hidden border-t border-slate-200 dark:border-emerald-800/60 bg-white/95 dark:bg-slate-950/95">
+  
+  <div class="px-4 pt-4 pb-2 border-b border-slate-200 dark:border-emerald-800/60 hidden" id="userSessionMobile">
+    <div class="flex items-center justify-between bg-emerald-100/50 dark:bg-emerald-900/20 px-4 py-3 rounded-xl">
+      <div class="flex flex-col gap-1">
+        <span class="text-sm font-semibold text-emerald-800 dark:text-emerald-100" id="userSessionNameMobile"></span>
+        <span class="text-xs px-3 py-1 rounded-full bg-white/80 dark:bg-slate-800/80 text-emerald-700 dark:text-emerald-300 font-semibold inline-block w-fit" id="userSessionPointsMobile">🌱 0</span>
+      </div>
+      <button class="text-xs px-4 py-2 rounded-full bg-red-500 text-white hover:bg-red-600 transition font-semibold" id="btnLogoutNavMobile">Salir</button>
+    </div>
+  </div>
+
+  <nav class="px-4 py-3 flex flex-col gap-3 text-sm">
+    <a href="index.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
+    <a href="acerca-de.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
+    <a href="dashboard-estudiante.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Dashboard</a>
+    <a href="recompensas.html" class="py-1 text-emerald-600 dark:text-emerald-400 font-semibold">Recompensas</a>
+  </nav>
+</div>
+</header>
+
+<!-- Main Content -->
+<main class="max-w-6xl mx-auto px-4 py-10">
+  
+  <!-- Sección de Puntos Actuales -->
+  <section class="mb-8">
+    <div class="bg-gradient-to-r from-emerald-50 to-emerald-100 dark:from-emerald-900/30 dark:to-emerald-800/30 border-2 border-emerald-300 dark:border-emerald-700 rounded-2xl p-8 text-center">
+      <p class="text-sm text-emerald-700 dark:text-emerald-200 mb-2">Tus Eco-Puntos Disponibles</p>
+      <h2 class="text-5xl font-bold text-emerald-700 dark:text-emerald-100 mb-4">
+        <span id="puntosDisponibles">0</span> 🌱
+      </h2>
+      <p class="text-sm text-emerald-600 dark:text-emerald-300">
+        Acumula más puntos participando en actividades de reciclaje
+      </p>
+    </div>
+  </section>
+
+  <!-- Sección de Recompensas -->
+  <section class="mb-16">
+    <h2 class="text-3xl md:text-4xl font-bold text-emerald-700 dark:text-emerald-100 mb-8 text-center">
+      Canjea tus Eco-Puntos
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="recompensasGrid">
+      <!-- Las recompensas se cargarán dinámicamente -->
+    </div>
+  </section>
+
+</main>
+
+<!-- Modal de Confirmación -->
+<div id="modalConfirmacion" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+  <div class="modal bg-white dark:bg-slate-800 rounded-2xl shadow-2xl max-w-md w-full p-6">
+    <div class="text-center mb-6">
+      <div class="w-16 h-16 mx-auto mb-4 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center">
+        <span class="text-3xl">🎁</span>
+      </div>
+      <h3 class="text-xl font-bold text-emerald-700 dark:text-emerald-100 mb-2" id="modalTitulo"></h3>
+      <p class="text-sm text-slate-600 dark:text-slate-300 mb-4" id="modalDescripcion"></p>
+    </div>
+
+    <div class="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-700 rounded-lg p-4 mb-6 text-center">
+      <p class="text-xs text-emerald-700 dark:text-emerald-200 mb-1">Costo</p>
+      <p class="text-2xl font-bold text-emerald-600 dark:text-emerald-400" id="modalCosto"></p>
+    </div>
+
+    <div class="flex gap-3">
+      <button id="btnCancelar" class="flex-1 px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition font-semibold">
+        Cancelar
+      </button>
+      <button id="btnConfirmar" class="flex-1 px-4 py-3 rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition font-semibold">
+        Canjear
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Notificación de Éxito -->
+<div id="notificacionExito" class="fixed top-4 right-4 hidden max-w-sm z-50">
+  <div class="bg-emerald-500 text-white rounded-lg shadow-lg p-4 flex items-start gap-3">
+    <div class="text-2xl">✅</div>
+    <div>
+      <p class="font-bold mb-1" id="notificacionTitulo"></p>
+      <p class="text-sm text-emerald-100" id="notificacionMensaje"></p>
+    </div>
+  </div>
+</div>
+
+<!-- Notificación de Error -->
+<div id="notificacionError" class="fixed top-4 right-4 hidden max-w-sm z-50">
+  <div class="bg-red-500 text-white rounded-lg shadow-lg p-4 flex items-start gap-3">
+    <div class="text-2xl">❌</div>
+    <div>
+      <p class="font-bold mb-1" id="notificacionErrorTitulo"></p>
+      <p class="text-sm text-red-100" id="notificacionErrorMensaje"></p>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="border-t border-slate-200 dark:border-emerald-800/60 bg-slate-100 dark:bg-slate-900/80 py-6 text-center mt-16">
+  <p class="text-xs text-emerald-700/80 dark:text-emerald-200/70">
+    &copy; 2025 Eco-Puntos | Universidad Técnica Nacional
+  </p>
+</footer>
+
+<!-- Scripts -->
+<script src="JS/sesion.js"></script>
+<script src="JS/sesion-navbar.js"></script>
+<script src="JS/theme.js"></script>
+<script src="json/recompensas-data.js"></script>
+
+<script>
+// ========================================
+// USAR DATOS DE RECOMPENSAS DEL ARCHIVO
+// ========================================
+const recompensas = obtenerRecompensas();
+
+let recompensaSeleccionada = null;
+
+// ========================================
+// CARGAR RECOMPENSAS
+// ========================================
+function cargarRecompensas() {
+  const grid = document.getElementById('recompensasGrid');
+  grid.innerHTML = '';
+
+  recompensas.forEach((recompensa, index) => {
+    const card = document.createElement('div');
+    card.className = 'reward-card bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-emerald-800/60 rounded-2xl overflow-hidden hover:shadow-xl hover:transform hover:-translate-y-2 transition-all duration-300 cursor-pointer flex flex-col';
+    card.style.animationDelay = `${index * 0.1}s`;
+    
+    card.innerHTML = `
+      <div class="bg-gradient-to-br from-emerald-200 to-emerald-100 dark:from-emerald-900/40 dark:to-emerald-800/40 p-6 text-center border-b border-slate-200 dark:border-emerald-700/40">
+        <div class="text-6xl mb-2">${recompensa.icono}</div>
+        <h3 class="text-lg font-bold text-emerald-800 dark:text-emerald-100">${recompensa.nombre}</h3>
+      </div>
+      
+      <div class="p-6 flex-1 flex flex-col">
+        <p class="text-sm text-slate-600 dark:text-slate-300 mb-4 flex-1">${recompensa.descripcion}</p>
+        
+        <div class="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-700 rounded-lg p-3 text-center mb-4">
+          <p class="text-xs text-emerald-700 dark:text-emerald-200 mb-1">Costo</p>
+          <p class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">${recompensa.costo} 🌱</p>
+        </div>
+        
+        <button class="w-full px-4 py-2 rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition font-semibold text-sm" onclick="abrirModal(${index})">
+          Canjear Ahora
+        </button>
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
+// ========================================
+// ABRIR MODAL DE CONFIRMACIÓN
+// ========================================
+function abrirModal(index) {
+  const usuario = obtenerUsuarioAutenticado();
+  
+  if (!usuario) {
+    mostrarError('Debes iniciar sesión', 'Por favor, inicia sesión para canjear recompensas');
+    return;
+  }
+
+  recompensaSeleccionada = recompensas[index];
+  
+  document.getElementById('modalTitulo').textContent = recompensaSeleccionada.nombre;
+  document.getElementById('modalDescripcion').textContent = recompensaSeleccionada.descripcion;
+  document.getElementById('modalCosto').textContent = `${recompensaSeleccionada.costo} 🌱`;
+  
+  document.getElementById('modalConfirmacion').classList.remove('hidden');
+  document.getElementById('modalConfirmacion').classList.add('flex');
+}
+
+// ========================================
+// CERRAR MODAL
+// ========================================
+function cerrarModal() {
+  document.getElementById('modalConfirmacion').classList.add('hidden');
+  document.getElementById('modalConfirmacion').classList.remove('flex');
+  recompensaSeleccionada = null;
+}
+
+// ========================================
+// CANJEAR RECOMPENSA
+// ========================================
+function canjearRecompensa() {
+  const usuario = obtenerUsuarioAutenticado();
+  
+  if (!usuario) {
+    mostrarError('Sesión expirada', 'Por favor, inicia sesión nuevamente');
+    cerrarModal();
+    return;
+  }
+
+  const puntosActuales = usuario.puntosActuales || 0;
+
+  if (puntosActuales < recompensaSeleccionada.costo) {
+    mostrarError(
+      'Puntos insuficientes',
+      `Necesitas ${recompensaSeleccionada.costo} 🌱 pero solo tienes ${puntosActuales} 🌱`
+    );
+    cerrarModal();
+    return;
+  }
+
+  // Restar puntos
+  actualizarEcoPuntos(-recompensaSeleccionada.costo);
+  
+  // Mostrar éxito
+  mostrarExito(
+    '¡Recompensa canjeada!',
+    `Has ganado "${recompensaSeleccionada.nombre}". Ve a la oficina de administración para retirarla.`
+  );
+
+  cerrarModal();
+  actualizarPuntosDisplay();
+  
+  // Registrar en historial
+  registrarCanje(recompensaSeleccionada);
+}
+
+// ========================================
+// REGISTRAR CANJE EN HISTORIAL
+// ========================================
+function registrarCanje(recompensa) {
+  const usuario = obtenerUsuarioAutenticado();
+  let canjes = JSON.parse(localStorage.getItem('canjesEcoPuntos') || '[]');
+  
+  canjes.push({
+    usuarioCedula: usuario.cedula,
+    recompensa: recompensa.nombre,
+    costo: recompensa.costo,
+    fecha: new Date().toISOString(),
+    estado: 'pendiente_retiro'
+  });
+
+  localStorage.setItem('canjesEcoPuntos', JSON.stringify(canjes));
+}
+
+// ========================================
+// MOSTRAR NOTIFICACIÓN DE ÉXITO
+// ========================================
+function mostrarExito(titulo, mensaje) {
+  const notif = document.getElementById('notificacionExito');
+  document.getElementById('notificacionTitulo').textContent = titulo;
+  document.getElementById('notificacionMensaje').textContent = mensaje;
+  
+  notif.classList.remove('hidden');
+  notif.classList.add('pulse-success');
+  
+  setTimeout(() => {
+    notif.classList.add('hidden');
+    notif.classList.remove('pulse-success');
+  }, 4000);
+}
+
+// ========================================
+// MOSTRAR NOTIFICACIÓN DE ERROR
+// ========================================
+function mostrarError(titulo, mensaje) {
+  const notif = document.getElementById('notificacionError');
+  document.getElementById('notificacionErrorTitulo').textContent = titulo;
+  document.getElementById('notificacionErrorMensaje').textContent = mensaje;
+  
+  notif.classList.remove('hidden');
+  
+  setTimeout(() => {
+    notif.classList.add('hidden');
+  }, 4000);
+}
+
+// ========================================
+// ACTUALIZAR DISPLAY DE PUNTOS
+// ========================================
+function actualizarPuntosDisplay() {
+  const usuario = obtenerUsuarioAutenticado();
+  
+  if (usuario) {
+    const puntosActuales = usuario.puntosActuales || 0;
+    document.getElementById('puntosDisponibles').textContent = puntosActuales;
+  }
+}
+
+// ========================================
+// EVENT LISTENERS
+// ========================================
+document.getElementById('btnConfirmar').addEventListener('click', canjearRecompensa);
+
+document.getElementById('btnCancelar').addEventListener('click', cerrarModal);
+
+document.getElementById('modalConfirmacion').addEventListener('click', (e) => {
+  if (e.target.id === 'modalConfirmacion') {
+    cerrarModal();
+  }
+});
+
+// ========================================
+// Menú Móvil
+// ========================================
+const menuToggle = document.getElementById('menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+
+if (menuToggle && mobileMenu) {
+  menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+    });
+  });
+}
+
+// ========================================
+// Escuchar cambios en puntos
+// ========================================
+window.addEventListener('ecoPuntosActualizados', () => {
+  actualizarPuntosDisplay();
+});
+
+// ========================================
+// Inicializar
+// ========================================
+window.addEventListener('DOMContentLoaded', () => {
+  cargarRecompensas();
+  actualizarPuntosDisplay();
+});
+</script>
+
+</body>
+</html>

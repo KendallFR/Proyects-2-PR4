@@ -1,0 +1,220 @@
+/* Transición suave al cambiar claro/oscuro */
+body {
+  transition: background 0.6s ease, color 0.6s ease;
+}
+
+/* Capa de fondo */
+.sky-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ----- DÍA (modo claro) ----- */
+.sky-day {
+  background: linear-gradient(to bottom, #bde0ff, #e6f4ff);
+}
+
+/* Nubes */
+.cloud {
+  position: absolute;
+  background: radial-gradient(circle at 30% 30%, #ffffff 0, #ffffff 40%, transparent 70%);
+  filter: blur(2px);
+  opacity: 0.9;
+  border-radius: 999px;
+  animation: moveClouds 40s linear infinite;
+}
+
+.cloud.small {
+  width: 140px;
+  height: 70px;
+}
+
+.cloud.medium {
+  width: 220px;
+  height: 110px;
+}
+
+.cloud.large {
+  width: 320px;
+  height: 160px;
+}
+
+@keyframes moveClouds {
+  from { transform: translateX(-30%); }
+  to   { transform: translateX(40%); }
+}
+
+/* ----- NOCHE (modo oscuro) ----- */
+.sky-night {
+  background: radial-gradient(circle at 20% 0, #384469 0, #020617 60%);
+}
+
+/* Estrellas */
+
+/* Estrellas con halo y parpadeo suave */
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 999px;
+  background: radial-gradient(circle, #ffffff 0, #ffffff 45%, transparent 80%);
+  box-shadow:
+    0 0 6px rgba(255, 255, 255, 0.9),
+    0 0 14px rgba(180, 220, 255, 0.7);
+  opacity: 0.5;
+  transform-origin: center;
+  animation: twinkle 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.25;
+    transform: scale(0.8) translateY(0px);
+    filter: blur(0.2px);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.25) translateY(-1px);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0.4;
+    transform: scale(1) translateY(1px);
+    filter: blur(0.3px);
+  }
+}
+
+
+/* Estrella fugaz suave con cola animada */
+.shooting-star {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, #ffffff 60%, transparent 100%);
+  box-shadow:
+    0 0 12px rgba(255, 255, 255, 1),
+    0 0 22px rgba(180, 210, 255, 0.95);
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(-20deg);
+  animation: shooting 4s ease-in-out infinite;
+}
+
+/* Cola animada */
+.shooting-star::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -180px;
+  width: 180px;
+  height: 3px;
+  transform: translateY(-50%);
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  border-radius: 999px;
+  filter: blur(1px);
+
+  /* La cola crece y disminuye: animación suave */
+  animation: tailFlow 1.3s ease-in-out infinite;
+}
+
+/* Movimiento de la estrella */
+@keyframes shooting {
+  0% {
+    opacity: 0;
+    transform: translate3d(-20vw, -10vh, 0) rotate(-20deg);
+  }
+  10% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 1;
+    transform: translate3d(45vw, 25vh, 0) rotate(-20deg);
+  }
+  75% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(60vw, 40vh, 0) rotate(-20deg);
+  }
+}
+
+/* Cola que respira: se alarga, se achica y parpadea */
+@keyframes tailFlow {
+  0% {
+    width: 150px;
+    opacity: 0.7;
+  }
+  50% {
+    width: 230px;   /* se estira */
+    opacity: 1;
+  }
+  100% {
+    width: 150px;   /* vuelve al tamaño base */
+    opacity: 0.6;
+  }
+}
+
+header {
+  position: relative;
+  z-index: 1000;
+}
+
+/* Botón hamburguesa */
+.menu-toggle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 9999; /* MÁS ALTO QUE TODO */
+  color: white;
+}
+
+/* Contenedor del usuario (Juan) */
+.user-box {
+  z-index: 1; /* MÁS BAJO PARA QUE NO TAPE EL MENÚ */
+  position: relative;
+}
+
+/* Menú desplegable */
+.nav-links {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  background: #001424;
+  padding: 15px;
+  border-radius: 12px;
+  position: absolute;
+  top: 70px;
+  right: 15px;
+  z-index: 9998; /* debajo del botón, pero encima de todo lo demás */
+}
+
+/* cuando está abierto */
+.nav-links.active {
+  display: flex;
+}
+
+/* Responsivo */
+@media (min-width: 900px) {
+  .menu-toggle {
+    display: none;
+  }
+  .nav-links {
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    background: none;
+    padding: 0;
+  }
+}

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>EcoCampusCR - Gamificación del reciclaje</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/sky.css">
+
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Configuración: modo oscuro por clase -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+</head>
+<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen relative overflow-x-hidden">
+
+<!-- Fondos animados -->
+<div class="sky-layer sky-day dark:hidden">
+  <div class="cloud large" style="top: 10%; left: -10%; animation-delay: 0s;"></div>
+  <div class="cloud medium" style="top: 25%; left: 40%; animation-delay: 8s;"></div>
+  <div class="cloud small" style="top: 50%; left: 10%; animation-delay: 15s;"></div>
+  <div class="cloud medium" style="top: 65%; left: 70%; animation-delay: 22s;"></div>
+</div>
+
+<div class="sky-layer sky-night hidden dark:block">
+  <!-- Estrellas extra -->
+  <span class="star" style="top: 5%; left: 10%; animation-delay: 0.3s;"></span>
+  <span class="star" style="top: 12%; left: 55%; animation-delay: 1.2s;"></span>
+  <span class="star" style="top: 22%; left: 30%; animation-delay: 2.1s;"></span>
+  <span class="star" style="top: 28%; left: 80%; animation-delay: 0.9s;"></span>
+  <span class="star" style="top: 40%; left: 12%; animation-delay: 1.8s;"></span>
+  <span class="star" style="top: 47%; left: 60%; animation-delay: 2.7s;"></span>
+  <span class="star" style="top: 58%; left: 35%; animation-delay: 0.4s;"></span>
+  <span class="star" style="top: 62%; left: 85%; animation-delay: 1.5s;"></span>
+  <span class="star" style="top: 73%; left: 25%; animation-delay: 2.3s;"></span>
+  <span class="star" style="top: 82%; left: 50%; animation-delay: 0.6s;"></span>
+  <span class="star" style="top: 88%; left: 70%; animation-delay: 1.9s;"></span>
+
+
+  <div class="shooting-star" style="top: 25%; left: 5%; animation-delay: 0s;"></div>
+  <div class="shooting-star" style="top: 60%; left: -10%; animation-delay: 2.5s;"></div>
+</div>
+
+
+ <!-- Header -->
+<header class="border-b border-slate-200 dark:border-emerald-800/60 
+        bg-white/70 dark:bg-slate-950/70 sticky top-0 z-20 backdrop-blur-md">
+  <div class="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+
+    <!-- Logo -->
+    <div class="flex items-center gap-2">
+      <div class="h-8 w-8 rounded-full bg-emerald-500/80 flex items-center justify-center text-slate-950 font-bold text-lg">
+        ♻️
+      </div>
+      <div>
+        <h1 class="text-lg font-semibold text-emerald-700 dark:text-emerald-100 leading-none">
+          EcoCampus<span class="text-emerald-500">CR</span>
+        </h1>
+        <p class="text-[10px] text-emerald-700/70 dark:text-emerald-200/70 mt-[1px]">
+          Convierte tu reciclaje en recompensas
+        </p>
+      </div>
+    </div>
+
+    <!-- Navegación escritorio -->
+    <nav class="hidden md:flex items-center gap-5 text-sm font-medium">
+      <a href="index.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
+      <a href="acerca-de.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
+      <a href="contacto.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
+      <a href="#como-funciona" class="hover:text-emerald-500 dark:hover:text-emerald-300">¿Cómo funciona?</a>
+      <a href="#impacto" class="hover:text-emerald-500 dark:hover:text-emerald-300">Impacto</a>
+      <a href="#eventos" class="hover:text-emerald-500 dark:hover:text-emerald-300">Eventos</a>
+      <a href="#faq" class="hover:text-emerald-500 dark:hover:text-emerald-300">FAQ</a>
+      <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
+    </nav>
+
+    <!-- Derecha -->
+    <div class="flex items-center gap-2">
+
+      <!-- Sesión usuario -->
+      <div id="userSession"
+        class="hidden md:flex items-center gap-2 bg-emerald-100/40 dark:bg-emerald-900/20 
+               px-2.5 py-1.5 rounded-full backdrop-blur-sm border border-emerald-300/40 dark:border-emerald-700/40">
+        
+        <span id="userSessionName" class="text-sm font-semibold text-emerald-800 dark:text-emerald-100"></span>
+
+        <span id="userSessionPoints"
+              class="text-[11px] px-2 py-0.5 rounded-full bg-white/70 dark:bg-slate-800/70 
+                     text-emerald-700 dark:text-emerald-300 font-semibold">
+          🌱 0
+        </span>
+
+        <button id="btnLogoutNav"
+                class="text-[11px] px-2.5 py-1 rounded-full bg-red-500 text-white 
+                       hover:bg-red-600 transition font-semibold">
+          Salir
+        </button>
+      </div>
+
+      <!-- Login -->
+      <div id="loginPrompt">
+        <a href="autenticacion.html"
+           class="hidden md:inline-block text-sm px-4 py-1.5 rounded-full bg-emerald-500 
+                  text-slate-950 font-semibold hover:bg-emerald-400 transition">
+          Iniciar Sesión
+        </a>
+      </div>
+
+      <!-- Botón tema -->
+      <button id="theme-toggle"
+              class="p-2 rounded-full border border-slate-300 dark:border-slate-600 
+                     hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+        <span id="theme-toggle-light" class="hidden">☀️</span>
+        <span id="theme-toggle-dark">🌙</span>
+      </button>
+
+      <!-- Hamburguesa -->
+      <button id="menu-toggle"
+              class="md:hidden p-2 rounded-full border border-slate-300 dark:border-slate-600 
+                     hover:bg-slate-100 dark:hover:bg-slate-800 transition text-lg">
+        ☰
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Menú móvil -->
+  <div id="mobile-menu"
+       class="md:hidden hidden border-t border-slate-200 dark:border-emerald-800/60 
+              bg-white/95 dark:bg-slate-950/95 shadow-lg">
+    
+
+
+    <nav class="px-4 py-3 flex flex-col gap-2 text-sm">
+      <a href="index.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
+      <a href="acerca-de.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
+      <a href="contacto.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
+      <a href="#como-funciona" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">¿Cómo funciona?</a>
+      <a href="#impacto" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Impacto</a>
+      <a href="#eventos" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Eventos</a>
+      <a href="#faq" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">FAQ</a>
+      <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
+
+      <a href="autenticacion.html"
+         id="loginPromptMobile"
+         class="mt-2 text-center text-sm px-4 py-2 rounded-full border border-emerald-500 
+                text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/10 transition">
+        Iniciar sesión
+      </a>
+    </nav>
+  </div>
+</header>
+
+
+  <!-- Hero -->
+  <main class="max-w-6xl mx-auto px-4 py-10 md:py-16">
+    <section class="grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <p class="text-xs font-semibold tracking-[0.2em] text-emerald-600 dark:text-emerald-300 uppercase mb-3">
+          Plataforma ambiental universitaria
+        </p>
+        <h2 class="text-3xl md:text-4xl font-bold text-emerald-800 dark:text-emerald-100 mb-4">
+          Recicla, suma puntos y gana <span class="text-emerald-500 dark:text-emerald-400">recompensas reales</span>.
+        </h2>
+        <p class="text-sm md:text-base text-emerald-800/80 dark:text-emerald-100/80 mb-6">
+          EcoCampusCR convierte tus acciones ambientales en puntos. 
+          Participa en misiones, actividades y campañas de reciclaje para canjearlos por beneficios 
+          como descuentos en matrícula, premios ecológicos y mucho más.
+        </p>
+
+        <div class="flex flex-wrap gap-3 mb-6">
+          <a href="login.html"
+             class="px-5 py-2.5 rounded-full bg-emerald-500 text-slate-950 text-sm font-semibold hover:bg-emerald-400">
+            Iniciar sesión con tu cédula
+          </a>
+          <a href="#como-funciona"
+             class="px-5 py-2.5 rounded-full border border-emerald-500/70 text-sm text-emerald-700 dark:text-emerald-100 hover:bg-emerald-500/10">
+            Ver cómo funciona
+          </a>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 text-xs">
+          <div class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-xl p-3">
+            <p class="text-emerald-700/80 dark:text-emerald-200/80">Botellas recicladas</p>
+            <p class="text-xl font-bold text-emerald-600 dark:text-emerald-300">12 430+</p>
+          </div>
+          <div class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-xl p-3">
+            <p class="text-emerald-700/80 dark:text-emerald-200/80">Estudiantes activos</p>
+            <p class="text-xl font-bold text-emerald-600 dark:text-emerald-300">820</p>
+          </div>
+          <div class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-xl p-3">
+            <p class="text-emerald-700/80 dark:text-emerald-200/80">Kg de CO₂ evitados</p>
+            <p class="text-xl font-bold text-emerald-600 dark:text-emerald-300">2 100+</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <div class="bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-emerald-800/60 rounded-2xl p-4">
+          <p class="text-sm font-semibold text-emerald-800 dark:text-emerald-100 mb-2">Tu progreso ambiental</p>
+          <div class="space-y-3">
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-emerald-700/80 dark:text-emerald-200/80">Nivel Eco</span>
+                <span class="text-emerald-600 dark:text-emerald-300 font-semibold">Eco 5</span>
+              </div>
+              <div class="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2">
+                <div class="bg-emerald-500 dark:bg-emerald-400 h-2 rounded-full" style="width: 60%;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-emerald-700/80 dark:text-emerald-200/80">Meta mensual de reciclaje</span>
+                <span class="text-emerald-600 dark:text-emerald-300 font-semibold">32/50 botellas</span>
+              </div>
+              <div class="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2">
+                <div class="bg-emerald-500 h-2 rounded-full" style="width: 64%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-emerald-800/60 rounded-2xl p-4">
+          <p class="text-xs font-semibold text-emerald-700/80 dark:text-emerald-200/80 mb-2">Ejemplo de misión</p>
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm font-medium text-emerald-800 dark:text-emerald-100">♻️ Recicla 40 botellas PET</p>
+              <p class="text-xs text-emerald-700/80 dark:text-emerald-200/80">
+                Lleva tus botellas al punto verde más cercano.
+              </p>
+            </div>
+            <div class="text-right">
+              <p class="text-[11px] text-emerald-700/80 dark:text-emerald-200/80">Recompensa</p>
+              <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-300">+150 pts</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cómo funciona -->
+    <section id="como-funciona" class="mt-16">
+      <h3 class="text-xl font-semibold text-emerald-800 dark:text-emerald-100 mb-4">
+        ¿Cómo funciona EcoCampusCR?
+      </h3>
+      <div class="grid md:grid-cols-3 gap-6 text-sm">
+        <div class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-2xl p-4">
+          <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-300 mb-1">Paso 1</p>
+          <h4 class="font-semibold text-emerald-800 dark:text-emerald-100 mb-2">Inicia sesión</h4>
+          <p class="text-emerald-700/80 dark:text-emerald-200/80">
+            Entra con tu cédula y contraseña para acceder a tu perfil, misiones y puntos.
+          </p>
+        </div>
+        <div class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-2xl p-4">
+          <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-300 mb-1">Paso 2</p>
+          <h4 class="font-semibold text-emerald-800 dark:text-emerald-100 mb-2">Completa misiones</h4>
+          <p class="text-emerald-700/80 dark:text-emerald-200/80">
+            Recicla, participa en campañas y asiste a actividades. Tu profesor o moderador validará tu participación.
+          </p>
+        </div>
+        <div class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-2xl p-4">
+          <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-300 mb-1">Paso 3</p>
+          <h4 class="font-semibold text-emerald-800 dark:text-emerald-100 mb-2">Canjea tus puntos</h4>
+          <p class="text-emerald-700/80 dark:text-emerald-200/80">
+            Cambia tus puntos por recompensas como descuentos en matrícula u otros beneficios ecológicos.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Eventos / Actividades tipo publicidad -->
+    <section id="eventos" class="mt-16">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold text-emerald-800 dark:text-emerald-100">Próximas actividades</h3>
+        <p class="text-xs text-emerald-700/80 dark:text-emerald-200/80">Conéctate con tu campus y el ambiente.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6 text-sm">
+        <article class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-2xl overflow-hidden flex flex-col">
+          <div class="h-28 bg-gradient-to-r from-emerald-400/60 to-lime-400/40 dark:from-emerald-500/50 dark:to-lime-400/40"></div>
+          <div class="p-4 flex-1 flex flex-col">
+            <h4 class="font-semibold text-emerald-800 dark:text-emerald-100 mb-1">
+              Jornada de siembra de árboles
+            </h4>
+            <p class="text-emerald-700/80 dark:text-emerald-200/80 mb-2 text-xs">
+              Sábado · 8:00 a.m. · Sede Central
+            </p>
+            <p class="text-emerald-700/80 dark:text-emerald-200/80 text-xs mb-4">
+              Acompáñanos a reforestar las zonas verdes del campus. 
+              Recibe puntos extra y certificados de participación.
+            </p>
+            <div class="mt-auto">
+              <a href="https://forms.google.com" target="_blank"
+                 class="inline-block text-xs px-4 py-2 rounded-full bg-emerald-500 text-slate-950 font-semibold hover:bg-emerald-400">
+                Unirme a la actividad
+              </a>
+            </div>
+          </div>
+        </article>
+        <!-- Puedes duplicar más cards para otros eventos -->
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="mt-16 mb-10">
+      <h3 class="text-xl font-semibold text-emerald-800 dark:text-emerald-100 mb-4">Preguntas frecuentes</h3>
+      <div class="space-y-3 text-sm">
+        <details class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-xl p-3">
+          <summary class="cursor-pointer font-medium text-emerald-800 dark:text-emerald-100">
+            ¿Quién valida mis puntos?
+          </summary>
+          <p class="mt-2 text-emerald-700/80 dark:text-emerald-200/80">
+            Los puntos son validados por moderadores o docentes responsables de cada actividad 
+            a través de formularios y listas de asistencia.
+          </p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 dark:border-emerald-800/60 py-4 text-center text-xs text-emerald-700/80 dark:text-emerald-200/70">
+    EcoCampusCR · Proyecto académico de gamificación ambiental · 2025
+  </footer>
+
+  <!-- JS del tema (archivo externo) -->
+  <script src="JS/theme.js"></script>
+  <script src="JS/sesion.js"></script>
+  <script src="JS/sesion-navbar.js"></script>
+
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Cerrar menú cuando se haga clic en un enlace
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+  }
+</script>
+
+
+
+  
+</body>
+</html>

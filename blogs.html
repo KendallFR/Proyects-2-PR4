@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Blog / Publicaciones - EcoCampusCR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/sky.css">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Configuración: modo oscuro por clase -->
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+
+  <style>
+    /* Ajustes específicos del feed */
+    .post-img { height: 220px; object-fit: cover; }
+    .ad-img { height: 120px; object-fit: cover; }
+    .scrollbar-thin::-webkit-scrollbar { height: 8px; width: 8px; }
+    .scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 6px; }
+
+    /* Mantener contraste del modal en dark */
+    .modal-card { background: #fff; }
+    .dark .modal-card { background: #0f1720; }
+  </style>
+</head>
+<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen relative overflow-x-hidden">
+
+  <!-- Fondos animados (usa sky.css) -->
+  <div class="sky-layer sky-day dark:hidden">
+    <div class="cloud large" style="top: 10%; left: -10%; animation-delay: 0s;"></div>
+    <div class="cloud medium" style="top: 25%; left: 40%; animation-delay: 8s;"></div>
+    <div class="cloud small" style="top: 50%; left: 10%; animation-delay: 15s;"></div>
+    <div class="cloud medium" style="top: 65%; left: 70%; animation-delay: 22s;"></div>
+  </div>
+
+  <div class="sky-layer sky-night hidden dark:block">
+    <span class="star" style="top: 5%; left: 10%; animation-delay: 0.3s;"></span>
+    <span class="star" style="top: 12%; left: 55%; animation-delay: 1.2s;"></span>
+    <span class="star" style="top: 22%; left: 30%; animation-delay: 2.1s;"></span>
+    <span class="star" style="top: 28%; left: 80%; animation-delay: 0.9s;"></span>
+    <div class="shooting-star" style="top: 25%; left: 5%; animation-delay: 0s;"></div>
+    <div class="shooting-star" style="top: 60%; left: -10%; animation-delay: 2.5s;"></div>
+  </div>
+
+  <!-- Header  -->
+  <header class="border-b border-slate-200 dark:border-emerald-800/60 bg-white/70 dark:bg-slate-950/70 sticky top-0 z-30 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+
+      <!-- Logo -->
+      <div class="flex items-center gap-2">
+        <div class="h-8 w-8 rounded-full bg-emerald-500/80 flex items-center justify-center text-slate-950 font-bold text-lg">♻️</div>
+        <div>
+          <h1 class="text-lg font-semibold text-emerald-700 dark:text-emerald-100 leading-none">EcoCampus<span class="text-emerald-500">CR</span></h1>
+          <p class="text-[10px] text-emerald-700/70 dark:text-emerald-200/70 mt-[1px]">Convierte tu reciclaje en recompensas</p>
+        </div>
+      </div>
+
+      <!-- Navegación escritorio -->
+     <nav class="hidden md:flex items-center gap-5 text-sm font-medium">
+      <a href="index.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
+      <a href="acerca-de.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
+      <a href="contacto.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
+      <a href="#como-funciona" class="hover:text-emerald-500 dark:hover:text-emerald-300">¿Cómo funciona?</a>
+      <a href="#impacto" class="hover:text-emerald-500 dark:hover:text-emerald-300">Impacto</a>
+      <a href="#eventos" class="hover:text-emerald-500 dark:hover:text-emerald-300">Eventos</a>
+      <a href="#faq" class="hover:text-emerald-500 dark:hover:text-emerald-300">FAQ</a>
+      <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
+    </nav>
+
+      <!-- Derecha: sesión, tema, hamburguesa -->
+      <div class="flex items-center gap-2">
+        <div id="userSession" class="hidden md:flex items-center gap-2 bg-emerald-100/40 dark:bg-emerald-900/20 px-2.5 py-1.5 rounded-full backdrop-blur-sm border border-emerald-300/40 dark:border-emerald-700/40">
+          <span id="userSessionName" class="text-sm font-semibold text-emerald-800 dark:text-emerald-100"></span>
+          <span id="userSessionPoints" class="text-[11px] px-2 py-0.5 rounded-full bg-white/70 dark:bg-slate-800/70 text-emerald-700 dark:text-emerald-300 font-semibold">🌱 0</span>
+          <button id="btnLogoutNav" class="text-[11px] px-2.5 py-1 rounded-full bg-red-500 text-white hover:bg-red-600 transition font-semibold">Salir</button>
+        </div>
+
+        <div id="loginPrompt" class="">
+          <a href="autenticacion.html" class="hidden md:inline-block text-sm px-4 py-1.5 rounded-full bg-emerald-500 text-slate-950 font-semibold hover:bg-emerald-400 transition">Iniciar Sesión</a>
+        </div>
+
+        <button id="theme-toggle" class="p-2 rounded-full border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <span id="theme-toggle-light" class="hidden">☀️</span>
+          <span id="theme-toggle-dark">🌙</span>
+        </button>
+
+        <button id="menu-toggle" class="md:hidden p-2 rounded-full border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-lg">☰</button>
+      </div>
+    </div>
+
+    <!-- Menú móvil -->
+    <div id="mobile-menu" class="md:hidden hidden border-t border-slate-200 dark:border-emerald-800/60 bg-white/95 dark:bg-slate-950/95 shadow-lg">
+      <nav class="hidden md:flex items-center gap-5 text-sm font-medium">
+      <a href="index.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
+      <a href="acerca-de.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
+      <a href="contacto.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
+      <a href="#como-funciona" class="hover:text-emerald-500 dark:hover:text-emerald-300">¿Cómo funciona?</a>
+      <a href="#impacto" class="hover:text-emerald-500 dark:hover:text-emerald-300">Impacto</a>
+      <a href="#eventos" class="hover:text-emerald-500 dark:hover:text-emerald-300">Eventos</a>
+      <a href="#faq" class="hover:text-emerald-500 dark:hover:text-emerald-300">FAQ</a>
+      <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
+    
+
+        <a href="autenticacion.html" id="loginPromptMobile" class="mt-2 text-center text-sm px-4 py-2 rounded-full border border-emerald-500 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/10 transition">Iniciar sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Layout: feed + sidebar -->
+  <main class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+    <!-- Feed (columna principal) -->
+    <section class="md:col-span-2 space-y-6">
+      <!-- Crear publicación -->
+      <div class="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4">
+        <div class="flex items-start gap-3">
+          <img src="https://via.placeholder.com/56" alt="avatar" class="w-14 h-14 rounded-full object-cover"/>
+          <div class="flex-1">
+            <textarea id="newPostText" rows="3" placeholder="¿Qué hay de nuevo?" class="w-full resize-none rounded-md p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:outline-none"></textarea>
+            <div class="flex items-center justify-between mt-3">
+              <div class="text-xs text-slate-500">Comparte una noticia, foto o evento</div>
+              <div>
+                <button id="publishBtn" class="px-4 py-2 bg-emerald-500 text-white rounded-full text-sm hover:bg-emerald-400">Publicar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lista de posts (se renderiza por JS) -->
+      <div id="postsContainer" class="space-y-6"></div>
+    </section>
+
+    <!-- Sidebar publicidad -->
+    <aside class="space-y-6">
+      <div class="sticky top-20 space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-semibold text-emerald-700">Publicidad</h2>
+          <span class="text-sm text-slate-500">Eventos</span>
+        </div>
+
+        <!-- Ads list -->
+        <div id="adsContainer" class="space-y-4"></div>
+
+        <!-- Ver todas -->
+        <a href="#" class="block text-center px-4 py-2 rounded-full border border-emerald-500 text-emerald-700 hover:bg-emerald-500/10">Ver todas las actividades</a>
+
+
+            <!-- Destacados -->
+      <div class="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4">
+        <h3 class="font-semibold mb-2">Destacados</h3>
+        <ul class="text-sm space-y-2">
+          <li class="text-emerald-600">• Campaña Basura Cero - 12 dic</li>
+          <li class="text-emerald-600">• Intercambio de libros - 18 dic</li>
+          <li class="text-emerald-600">• Jornada de siembra - 02 ene</li>
+        </ul>
+      </div>
+
+      </div>
+
+  
+    </aside>
+  </main>
+
+  <!-- Modal publicidad -->
+  <div id="adModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+    <div class="modal-card rounded-2xl max-w-xl w-full p-6 border border-slate-200 dark:border-emerald-800/40">
+      <button id="closeAdModal" class="text-slate-400 hover:text-slate-600 float-right text-2xl">&times;</button>
+      <div id="adModalContent" class="mt-4"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="max-w-6xl mx-auto px-4 py-6 text-center text-xs text-emerald-700/80 dark:text-emerald-200/70">
+    EcoCampusCR · Proyecto académico de gamificación ambiental · 2025
+  </footer>
+
+  <!-- Scripts externos (usa los tuyos) -->
+  <script src="JS/theme.js"></script>
+  <script src="JS/sesion.js"></script>
+  <script src="JS/sesion-navbar.js"></script>
+
+  <!-- Feed + Ads JS (usa tu estilo/colores) -->
+  <script>
+    // ======== Datos de ejemplo (puedes cargar dinámicamente desde tu backend o JSON) ========
+    const samplePosts = [
+      {
+        id: 'p1',
+        author: 'María López',
+        avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=60',
+        time: 'Hace 2 hrs',
+        text: 'Hoy recolectamos 120kg de residuos orgánicos en la plaza central. ¡Gracias a todxs!',
+        img: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1200&q=60',
+        likes: 12,
+        comments: [{by: 'Carlos', text: 'Excelente trabajo!'}]
+      },
+      {
+        id: 'p2',
+        author: 'Sistema EcoCampus',
+        avatar: 'https://via.placeholder.com/120',
+        time: 'Ayer',
+        text: 'Próxima jornada de siembra este sábado. Inscríbete en el anuncio a la derecha.',
+        img: '',
+        likes: 7,
+        comments: []
+      }
+    ];
+
+    const sampleAds = [
+      {
+        id: 'a1',
+        img: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800&q=60',
+        title: 'Jornada de Siembra - Sede Central',
+        desc: 'Únete a la jornada de reforestación, certificado y puntos por participación.',
+        form: 'https://forms.gle/tu-form-de-ejemplo-1'
+      },
+      {
+        id: 'a2',
+        img: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=60',
+        title: 'Taller: Compostaje doméstico',
+        desc: 'Aprende a compostar en tu casa — cupos limitados.',
+        form: 'https://forms.gle/tu-form-de-ejemplo-2'
+      }
+    ];
+
+    // ======== RENDER ========
+    const postsContainer = document.getElementById('postsContainer');
+    const adsContainer = document.getElementById('adsContainer');
+    const adModal = document.getElementById('adModal');
+    const adModalContent = document.getElementById('adModalContent');
+    const closeAdModal = document.getElementById('closeAdModal');
+
+    function escapeHtml(str = '') {
+      return String(str).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
+    }
+
+    function renderAds() {
+      adsContainer.innerHTML = '';
+      sampleAds.forEach(ad => {
+        const card = document.createElement('div');
+        card.className = 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden';
+        card.innerHTML = `
+          <img src="${ad.img}" alt="${escapeHtml(ad.title)}" class="w-full ad-img"/>
+          <div class="p-3">
+            <h4 class="font-semibold text-emerald-700 mb-1">${escapeHtml(ad.title)}</h4>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mb-3">${escapeHtml(ad.desc)}</p>
+            <div class="flex gap-2">
+              <button data-ad-id="${ad.id}" class="see-more flex-1 px-3 py-2 rounded-md border border-slate-200 dark:border-slate-700 text-sm">Ver más</button>
+              <a href="${ad.form}" target="_blank" class="join-btn flex-1 px-3 py-2 rounded-md bg-emerald-500 text-white text-center text-sm hover:bg-emerald-400">Unirse</a>
+            </div>
+          </div>
+        `;
+        adsContainer.appendChild(card);
+      });
+
+      document.querySelectorAll('.see-more').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = e.currentTarget.getAttribute('data-ad-id');
+          const ad = sampleAds.find(a => a.id === id);
+          if (ad) {
+            adModalContent.innerHTML = `
+              <img src="${ad.img}" class="w-full rounded-xl mb-4" alt="${escapeHtml(ad.title)}"/>
+              <h3 class="text-xl font-semibold text-emerald-700 mb-2">${escapeHtml(ad.title)}</h3>
+              <p class="text-sm mb-4 text-slate-700 dark:text-slate-300">${escapeHtml(ad.desc)}</p>
+              <a href="${ad.form}" target="_blank" class="w-full inline-block text-center px-4 py-3 rounded-full bg-emerald-500 text-white font-semibold">Unirse</a>
+            `;
+            adModal.classList.remove('hidden');
+            adModal.classList.add('flex');
+          }
+        });
+      });
+    }
+
+    function renderPosts() {
+      postsContainer.innerHTML = '';
+      (window.posts = samplePosts).forEach(post => {
+        const div = document.createElement('article');
+        div.className = 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4';
+        div.innerHTML = `
+          <div class="flex gap-3">
+            <img src="${post.avatar}" alt="${escapeHtml(post.author)}" class="w-12 h-12 rounded-full object-cover" />
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="font-semibold">${escapeHtml(post.author)}</div>
+                  <div class="text-xs text-slate-500">${escapeHtml(post.time)}</div>
+                </div>
+                <div></div>
+              </div>
+
+              <p class="mt-3 text-sm text-slate-700 dark:text-slate-300">${escapeHtml(post.text)}</p>
+
+              ${post.img ? `<img src="${post.img}" alt="" class="mt-3 rounded-md w-full post-img">` : ''}
+
+              <!-- actions -->
+              <div class="mt-3 flex items-center gap-4">
+                <button data-post-id="${post.id}" class="like-btn inline-flex items-center gap-2 text-sm px-3 py-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700">❤️ <span class="like-count">${post.likes}</span></button>
+
+                <button data-post-id="${post.id}" class="comment-toggle-btn inline-flex items-center gap-2 text-sm px-3 py-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700">💬 <span class="comment-count">${post.comments.length}</span></button>
+              </div>
+
+              <!-- comments -->
+              <div class="comments-area mt-3 hidden">
+                <div class="existing-comments space-y-2 mb-3"></div>
+                <div class="flex gap-2">
+                  <input type="text" class="flex-1 px-3 py-2 rounded-md bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700" placeholder="Escribe un comentario..."/>
+                  <button class="post-comment-btn px-3 py-2 rounded-md bg-emerald-500 text-white">Comentar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        postsContainer.appendChild(div);
+      });
+
+      // likes
+      document.querySelectorAll('.like-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const pid = btn.getAttribute('data-post-id');
+          const p = samplePosts.find(x => x.id === pid);
+          if (p) {
+            p._liked = !p._liked;
+            p.likes += p._liked ? 1 : -1;
+            btn.querySelector('.like-count').textContent = p.likes;
+            btn.style.opacity = p._liked ? '0.9' : '1';
+          }
+        });
+      });
+
+      // toggle comments
+      document.querySelectorAll('.comment-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const pid = btn.getAttribute('data-post-id');
+          const postEl = btn.closest('article');
+          const area = postEl.querySelector('.comments-area');
+          area.classList.toggle('hidden');
+          renderComments(pid, postEl);
+        });
+      });
+
+      // post comment
+      document.querySelectorAll('.post-comment-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const postEl = btn.closest('article');
+          const input = postEl.querySelector('input');
+          const pid = postEl.querySelector('.like-btn').getAttribute('data-post-id');
+          if (!input.value.trim()) return;
+          const p = samplePosts.find(x => x.id === pid);
+          p.comments.push({ by: 'Tú', text: input.value.trim() });
+          input.value = '';
+          renderComments(pid, postEl);
+          postEl.querySelector('.comment-count').textContent = p.comments.length;
+        });
+      });
+    }
+
+    function renderComments(pid, postEl) {
+      const p = samplePosts.find(x => x.id === pid);
+      const container = postEl.querySelector('.existing-comments');
+      container.innerHTML = '';
+      p.comments.forEach(c => {
+        const item = document.createElement('div');
+        item.className = 'bg-slate-100 dark:bg-slate-900 p-2 rounded-md text-sm';
+        item.innerHTML = `<strong class="text-emerald-700 mr-2">${escapeHtml(c.by)}:</strong> ${escapeHtml(c.text)}`;
+        container.appendChild(item);
+      });
+    }
+
+    // publicar nuevo post (local)
+    document.getElementById('publishBtn').addEventListener('click', () => {
+      const text = document.getElementById('newPostText').value.trim();
+      if (!text) return alert('Escribe algo para publicar');
+      const newPost = {
+        id: 'p' + (Math.random()*100000|0),
+        author: 'Tú',
+        avatar: 'https://via.placeholder.com/120',
+        time: 'Ahora',
+        text,
+        img: '',
+        likes: 0,
+        comments: []
+      };
+      samplePosts.unshift(newPost);
+      document.getElementById('newPostText').value = '';
+      renderPosts();
+    });
+
+    // modal cerrar
+    closeAdModal?.addEventListener('click', () => {
+      adModal.classList.add('hidden');
+      adModal.classList.remove('flex');
+    });
+    adModal.addEventListener('click', (e) => {
+      if (e.target === adModal) {
+        adModal.classList.add('hidden');
+        adModal.classList.remove('flex');
+      }
+    });
+
+    // init
+    renderAds();
+    renderPosts();
+
+    // Mobile menu toggle (header)
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+      mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+    }
+
+    // Theme toggle behavior (in case theme.js not mounted yet)
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+      });
+      if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+    }
+  </script>
+</body>
+</html>
