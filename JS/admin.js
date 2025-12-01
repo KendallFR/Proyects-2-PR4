@@ -6,7 +6,7 @@ window.addEventListener('DOMContentLoaded', () => {
   
   if (!usuario || usuario.rol !== 'admin') {
     alert('⚠️ Acceso denegado. Solo administradores pueden acceder.');
-    window.location.href = '../HTML/autenticacion.html';
+    window.location.href = 'autenticacion.html';
     return;
   }
 
