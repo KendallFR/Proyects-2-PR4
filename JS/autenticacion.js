@@ -173,9 +173,10 @@ registerForm.addEventListener('submit', (e) => {
     registerForm.reset();
     limpiarErroresRegistro();
 
+    // Redirigir inmediatamente sin mostrar pantalla de usuario
     setTimeout(() => {
         redirigirAPaginaAnterior();
-    }, 2000);
+    }, 1500);
 });
 
 function mostrarErroresRegistro(errores) {
@@ -264,14 +265,14 @@ loginForm.addEventListener('submit', (e) => {
     }
 
     localStorage.setItem('usuarioActual', JSON.stringify(usuario));
-    mostrarUsuarioAutenticado(usuario);
     mostrarExito('¡Inicio de sesión exitoso! Redirigiendo...');
     loginForm.reset();
     limpiarErroresLogin();
 
+    // Redirigir inmediatamente sin mostrar pantalla de usuario
     setTimeout(() => {
         redirigirAPaginaAnterior();
-    }, 2000);
+    }, 1500);
 });
 
 function mostrarErroresLogin(errores) {
@@ -377,7 +378,7 @@ function redirigirAPaginaAnterior() {
     if (paginaAnterior && paginaAnterior !== window.location.pathname) {
         window.location.href = paginaAnterior;
     } else {
-        window.location.href = '../index.html';
+        window.location.href = 'index.html';
     }
 }
 

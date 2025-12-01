@@ -569,12 +569,6 @@ function enviarValidacion() {
     const usuario = JSON.parse(usuarioActual);
     const btnEnviar = document.getElementById('btn-enviar-validacion');
     
-    // Validar que se haya subido foto si es misión
-    if (misionEventoActual.tipo === 'mision' && !fotoSeleccionada) {
-        alert('Por favor, sube una foto de evidencia antes de continuar.');
-        return;
-    }
-    
     // Deshabilitar botón mientras procesa
     btnEnviar.disabled = true;
     btnEnviar.innerHTML = '<span>Procesando...</span>';
