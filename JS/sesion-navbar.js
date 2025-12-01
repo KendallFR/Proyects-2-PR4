@@ -57,16 +57,19 @@ function mostrarInfoUsuario(usuario) {
     const nombreCorto = usuario.nombre.split(' ')[0];
     const puntos = usuario.puntosActuales || 0;
 
-    // Escritorio - usar clases de Tailwind en lugar de style.display
+    // Escritorio
     if (userSession) {
-        userSession.classList.remove('hidden');
-        userSession.classList.add('md:flex');
+        userSession.classList.remove('hidden', 'md:hidden');
+        userSession.classList.add('hidden', 'md:flex');
     }
     if (userSessionName) userSessionName.textContent = `${icono} ${nombreCorto}`;
     if (userSessionPoints) userSessionPoints.textContent = `🌱 ${puntos}`;
 
     // Móvil
-    if (userSessionMobile) userSessionMobile.classList.remove('hidden');
+    if (userSessionMobile) {
+        userSessionMobile.classList.remove('hidden');
+        userSessionMobile.classList.add('flex', 'md:hidden');
+    }
     if (userSessionNameMobile) userSessionNameMobile.textContent = `${icono} ${nombreCorto}`;
     if (userSessionPointsMobile) userSessionPointsMobile.textContent = `🌱 ${puntos}`;
 }

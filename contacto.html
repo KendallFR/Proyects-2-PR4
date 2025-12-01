@@ -144,10 +144,7 @@
       <a href="index.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
       <a href="acerca-de.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
       <a href="contacto.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
-      <a href="#como-funciona" class="hover:text-emerald-500 dark:hover:text-emerald-300">¿Cómo funciona?</a>
-      <a href="#impacto" class="hover:text-emerald-500 dark:hover:text-emerald-300">Impacto</a>
-      <a href="#eventos" class="hover:text-emerald-500 dark:hover:text-emerald-300">Eventos</a>
-      <a href="#faq" class="hover:text-emerald-500 dark:hover:text-emerald-300">FAQ</a>
+      <a href="dashboard-estudiante.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Dashboard</a>
       <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
     </nav>
 
@@ -202,30 +199,42 @@
   </div>
 
   <!-- Menú móvil -->
-  <div id="mobile-menu"
-       class="md:hidden hidden border-t border-slate-200 dark:border-emerald-800/60 
+  <div id="mobile-menu" class="md:hidden hidden border-t border-slate-200 dark:border-emerald-800/60 
               bg-white/95 dark:bg-slate-950/95 shadow-lg">
-    
 
+      <div id="userSessionMobile" class="hidden flex-col gap-2 px-4 py-3 bg-emerald-100/40 dark:bg-emerald-900/20 
+              border-b border-emerald-300/40 dark:border-emerald-700/40">
 
-    <nav class="px-4 py-3 flex flex-col gap-2 text-sm">
-      <a href="index.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
-      <a href="acerca-de.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
-      <a href="contacto.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
-      <a href="#como-funciona" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">¿Cómo funciona?</a>
-      <a href="#impacto" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Impacto</a>
-      <a href="#eventos" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Eventos</a>
-      <a href="#faq" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">FAQ</a>
-      <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span id="userSessionNameMobile"
+              class="text-sm font-semibold text-emerald-800 dark:text-emerald-100"></span>
+            <span id="userSessionPointsMobile" class="text-xs px-2 py-0.5 rounded-full bg-white/70 dark:bg-slate-800/70 
+                     text-emerald-700 dark:text-emerald-300 font-semibold">
+              🌱 0
+            </span>
+          </div>
 
-      <a href="autenticacion.html"
-         id="loginPromptMobile"
-         class="mt-2 text-center text-sm px-4 py-2 rounded-full border border-emerald-500 
+          <button id="btnLogoutNavMobile" class="text-xs px-3 py-1.5 rounded-full bg-red-500 text-white 
+                     hover:bg-red-600 transition font-semibold">
+            Salir
+          </button>
+        </div>
+      </div>
+
+      <nav class="px-4 py-3 flex flex-col gap-2 text-sm">
+        <a href="index.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
+        <a href="acerca-de.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
+        <a href="contacto.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
+        <a href="dashboard-estudiante.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Dashboard</a>
+        <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
+
+        <a href="autenticacion.html" id="loginPromptMobile" class="mt-2 text-center text-sm px-4 py-2 rounded-full border border-emerald-500 
                 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/10 transition">
-        Iniciar sesión
-      </a>
-    </nav>
-  </div>
+          Iniciar sesión
+        </a>
+      </nav>
+    </div>
 </header>
 
 

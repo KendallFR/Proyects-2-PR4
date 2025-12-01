@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <title>EcoCampusCR - Gamificación del reciclaje</title>
@@ -17,144 +18,155 @@
     }
   </script>
 </head>
+
 <body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen relative overflow-x-hidden">
 
-<!-- Fondos animados -->
-<div class="sky-layer sky-day dark:hidden">
-  <div class="cloud large" style="top: 10%; left: -10%; animation-delay: 0s;"></div>
-  <div class="cloud medium" style="top: 25%; left: 40%; animation-delay: 8s;"></div>
-  <div class="cloud small" style="top: 50%; left: 10%; animation-delay: 15s;"></div>
-  <div class="cloud medium" style="top: 65%; left: 70%; animation-delay: 22s;"></div>
-</div>
+  <!-- Fondos animados -->
+  <div class="sky-layer sky-day dark:hidden">
+    <div class="cloud large" style="top: 10%; left: -10%; animation-delay: 0s;"></div>
+    <div class="cloud medium" style="top: 25%; left: 40%; animation-delay: 8s;"></div>
+    <div class="cloud small" style="top: 50%; left: 10%; animation-delay: 15s;"></div>
+    <div class="cloud medium" style="top: 65%; left: 70%; animation-delay: 22s;"></div>
+  </div>
 
-<div class="sky-layer sky-night hidden dark:block">
-  <!-- Estrellas extra -->
-  <span class="star" style="top: 5%; left: 10%; animation-delay: 0.3s;"></span>
-  <span class="star" style="top: 12%; left: 55%; animation-delay: 1.2s;"></span>
-  <span class="star" style="top: 22%; left: 30%; animation-delay: 2.1s;"></span>
-  <span class="star" style="top: 28%; left: 80%; animation-delay: 0.9s;"></span>
-  <span class="star" style="top: 40%; left: 12%; animation-delay: 1.8s;"></span>
-  <span class="star" style="top: 47%; left: 60%; animation-delay: 2.7s;"></span>
-  <span class="star" style="top: 58%; left: 35%; animation-delay: 0.4s;"></span>
-  <span class="star" style="top: 62%; left: 85%; animation-delay: 1.5s;"></span>
-  <span class="star" style="top: 73%; left: 25%; animation-delay: 2.3s;"></span>
-  <span class="star" style="top: 82%; left: 50%; animation-delay: 0.6s;"></span>
-  <span class="star" style="top: 88%; left: 70%; animation-delay: 1.9s;"></span>
-
-
-  <div class="shooting-star" style="top: 25%; left: 5%; animation-delay: 0s;"></div>
-  <div class="shooting-star" style="top: 60%; left: -10%; animation-delay: 2.5s;"></div>
-</div>
+  <div class="sky-layer sky-night hidden dark:block">
+    <!-- Estrellas extra -->
+    <span class="star" style="top: 5%; left: 10%; animation-delay: 0.3s;"></span>
+    <span class="star" style="top: 12%; left: 55%; animation-delay: 1.2s;"></span>
+    <span class="star" style="top: 22%; left: 30%; animation-delay: 2.1s;"></span>
+    <span class="star" style="top: 28%; left: 80%; animation-delay: 0.9s;"></span>
+    <span class="star" style="top: 40%; left: 12%; animation-delay: 1.8s;"></span>
+    <span class="star" style="top: 47%; left: 60%; animation-delay: 2.7s;"></span>
+    <span class="star" style="top: 58%; left: 35%; animation-delay: 0.4s;"></span>
+    <span class="star" style="top: 62%; left: 85%; animation-delay: 1.5s;"></span>
+    <span class="star" style="top: 73%; left: 25%; animation-delay: 2.3s;"></span>
+    <span class="star" style="top: 82%; left: 50%; animation-delay: 0.6s;"></span>
+    <span class="star" style="top: 88%; left: 70%; animation-delay: 1.9s;"></span>
 
 
- <!-- Header -->
-<header class="border-b border-slate-200 dark:border-emerald-800/60 
+    <div class="shooting-star" style="top: 25%; left: 5%; animation-delay: 0s;"></div>
+    <div class="shooting-star" style="top: 60%; left: -10%; animation-delay: 2.5s;"></div>
+  </div>
+
+
+  <!-- Header -->
+  <header class="border-b border-slate-200 dark:border-emerald-800/60 
         bg-white/70 dark:bg-slate-950/70 sticky top-0 z-20 backdrop-blur-md">
-  <div class="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+    <div class="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
 
-    <!-- Logo -->
-    <div class="flex items-center gap-2">
-      <div class="h-8 w-8 rounded-full bg-emerald-500/80 flex items-center justify-center text-slate-950 font-bold text-lg">
-        ♻️
+      <!-- Logo -->
+      <div class="flex items-center gap-2">
+        <div
+          class="h-8 w-8 rounded-full bg-emerald-500/80 flex items-center justify-center text-slate-950 font-bold text-lg">
+          ♻️
+        </div>
+        <div>
+          <h1 class="text-lg font-semibold text-emerald-700 dark:text-emerald-100 leading-none">
+            EcoCampus<span class="text-emerald-500">CR</span>
+          </h1>
+          <p class="text-[10px] text-emerald-700/70 dark:text-emerald-200/70 mt-[1px]">
+            Convierte tu reciclaje en recompensas
+          </p>
+        </div>
       </div>
-      <div>
-        <h1 class="text-lg font-semibold text-emerald-700 dark:text-emerald-100 leading-none">
-          EcoCampus<span class="text-emerald-500">CR</span>
-        </h1>
-        <p class="text-[10px] text-emerald-700/70 dark:text-emerald-200/70 mt-[1px]">
-          Convierte tu reciclaje en recompensas
-        </p>
-      </div>
-    </div>
 
-    <!-- Navegación escritorio -->
-    <nav class="hidden md:flex items-center gap-5 text-sm font-medium">
-      <a href="index.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
-      <a href="acerca-de.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
-      <a href="contacto.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
-      <a href="#como-funciona" class="hover:text-emerald-500 dark:hover:text-emerald-300">¿Cómo funciona?</a>
-      <a href="#impacto" class="hover:text-emerald-500 dark:hover:text-emerald-300">Impacto</a>
-      <a href="#eventos" class="hover:text-emerald-500 dark:hover:text-emerald-300">Eventos</a>
-      <a href="#faq" class="hover:text-emerald-500 dark:hover:text-emerald-300">FAQ</a>
-      <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
-    </nav>
+      <!-- Navegación escritorio -->
+      <nav class="hidden md:flex items-center gap-5 text-sm font-medium">
+        <a href="index.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
+        <a href="acerca-de.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
+        <a href="contacto.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
+        <a href="#como-funciona" class="hover:text-emerald-500 dark:hover:text-emerald-300">¿Cómo funciona?</a>
+        <a href="#impacto" class="hover:text-emerald-500 dark:hover:text-emerald-300">Impacto</a>
+        <a href="#eventos" class="hover:text-emerald-500 dark:hover:text-emerald-300">Eventos</a>
+        <a href="#faq" class="hover:text-emerald-500 dark:hover:text-emerald-300">FAQ</a>
+        <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
+      </nav>
 
-    <!-- Derecha -->
-    <div class="flex items-center gap-2">
+      <!-- Derecha -->
+      <div class="flex items-center gap-2">
 
-      <!-- Sesión usuario -->
-      <div id="userSession"
-        class="hidden md:flex items-center gap-2 bg-emerald-100/40 dark:bg-emerald-900/20 
+        <!-- Sesión usuario -->
+        <div id="userSession" class="hidden md:flex items-center gap-2 bg-emerald-100/40 dark:bg-emerald-900/20 
                px-2.5 py-1.5 rounded-full backdrop-blur-sm border border-emerald-300/40 dark:border-emerald-700/40">
-        
-        <span id="userSessionName" class="text-sm font-semibold text-emerald-800 dark:text-emerald-100"></span>
 
-        <span id="userSessionPoints"
-              class="text-[11px] px-2 py-0.5 rounded-full bg-white/70 dark:bg-slate-800/70 
+          <span id="userSessionName" class="text-sm font-semibold text-emerald-800 dark:text-emerald-100"></span>
+
+          <span id="userSessionPoints" class="text-[11px] px-2 py-0.5 rounded-full bg-white/70 dark:bg-slate-800/70 
                      text-emerald-700 dark:text-emerald-300 font-semibold">
-          🌱 0
-        </span>
+            🌱 0
+          </span>
 
-        <button id="btnLogoutNav"
-                class="text-[11px] px-2.5 py-1 rounded-full bg-red-500 text-white 
+          <button id="btnLogoutNav" class="text-[11px] px-2.5 py-1 rounded-full bg-red-500 text-white 
                        hover:bg-red-600 transition font-semibold">
-          Salir
-        </button>
-      </div>
+            Salir
+          </button>
+        </div>
 
-      <!-- Login -->
-      <div id="loginPrompt">
-        <a href="autenticacion.html"
-           class="hidden md:inline-block text-sm px-4 py-1.5 rounded-full bg-emerald-500 
+        <!-- Login -->
+        <div id="loginPrompt">
+          <a href="autenticacion.html" class="hidden md:inline-block text-sm px-4 py-1.5 rounded-full bg-emerald-500 
                   text-slate-950 font-semibold hover:bg-emerald-400 transition">
-          Iniciar Sesión
-        </a>
+            Iniciar Sesión
+          </a>
+        </div>
+
+        <!-- Botón tema -->
+        <button id="theme-toggle" class="p-2 rounded-full border border-slate-300 dark:border-slate-600 
+                     hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <span id="theme-toggle-light" class="hidden">☀️</span>
+          <span id="theme-toggle-dark">🌙</span>
+        </button>
+
+        <!-- Hamburguesa -->
+        <button id="menu-toggle" class="md:hidden p-2 rounded-full border border-slate-300 dark:border-slate-600 
+                     hover:bg-slate-100 dark:hover:bg-slate-800 transition text-lg">
+          ☰
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Menú móvil -->
+    <div id="mobile-menu" class="md:hidden hidden border-t border-slate-200 dark:border-emerald-800/60 
+              bg-white/95 dark:bg-slate-950/95 shadow-lg">
+
+      <div id="userSessionMobile" class="hidden flex-col gap-2 px-4 py-3 bg-emerald-100/40 dark:bg-emerald-900/20 
+              border-b border-emerald-300/40 dark:border-emerald-700/40">
+
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span id="userSessionNameMobile"
+              class="text-sm font-semibold text-emerald-800 dark:text-emerald-100"></span>
+            <span id="userSessionPointsMobile" class="text-xs px-2 py-0.5 rounded-full bg-white/70 dark:bg-slate-800/70 
+                     text-emerald-700 dark:text-emerald-300 font-semibold">
+              🌱 0
+            </span>
+          </div>
+
+          <button id="btnLogoutNavMobile" class="text-xs px-3 py-1.5 rounded-full bg-red-500 text-white 
+                     hover:bg-red-600 transition font-semibold">
+            Salir
+          </button>
+        </div>
       </div>
 
-      <!-- Botón tema -->
-      <button id="theme-toggle"
-              class="p-2 rounded-full border border-slate-300 dark:border-slate-600 
-                     hover:bg-slate-100 dark:hover:bg-slate-800 transition">
-        <span id="theme-toggle-light" class="hidden">☀️</span>
-        <span id="theme-toggle-dark">🌙</span>
-      </button>
+      <nav class="px-4 py-3 flex flex-col gap-2 text-sm">
+        <a href="index.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
+        <a href="acerca-de.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
+        <a href="contacto.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
+        <a href="#como-funciona" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">¿Cómo funciona?</a>
+        <a href="#impacto" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Impacto</a>
+        <a href="#eventos" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Eventos</a>
+        <a href="#faq" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">FAQ</a>
+        <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
 
-      <!-- Hamburguesa -->
-      <button id="menu-toggle"
-              class="md:hidden p-2 rounded-full border border-slate-300 dark:border-slate-600 
-                     hover:bg-slate-100 dark:hover:bg-slate-800 transition text-lg">
-        ☰
-      </button>
-
-    </div>
-  </div>
-
-  <!-- Menú móvil -->
-  <div id="mobile-menu"
-       class="md:hidden hidden border-t border-slate-200 dark:border-emerald-800/60 
-              bg-white/95 dark:bg-slate-950/95 shadow-lg">
-    
-
-
-    <nav class="px-4 py-3 flex flex-col gap-2 text-sm">
-      <a href="index.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
-      <a href="acerca-de.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
-      <a href="contacto.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
-      <a href="#como-funciona" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">¿Cómo funciona?</a>
-      <a href="#impacto" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Impacto</a>
-      <a href="#eventos" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Eventos</a>
-      <a href="#faq" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">FAQ</a>
-      <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
-
-      <a href="autenticacion.html"
-         id="loginPromptMobile"
-         class="mt-2 text-center text-sm px-4 py-2 rounded-full border border-emerald-500 
+        <a href="autenticacion.html" id="loginPromptMobile" class="mt-2 text-center text-sm px-4 py-2 rounded-full border border-emerald-500 
                 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/10 transition">
-        Iniciar sesión
-      </a>
-    </nav>
-  </div>
-</header>
+          Iniciar sesión
+        </a>
+      </nav>
+    </div>
+  </header>
 
 
   <!-- Hero -->
@@ -168,34 +180,37 @@
           Recicla, suma puntos y gana <span class="text-emerald-500 dark:text-emerald-400">recompensas reales</span>.
         </h2>
         <p class="text-sm md:text-base text-emerald-800/80 dark:text-emerald-100/80 mb-6">
-          EcoCampusCR convierte tus acciones ambientales en puntos. 
-          Participa en misiones, actividades y campañas de reciclaje para canjearlos por beneficios 
+          EcoCampusCR convierte tus acciones ambientales en puntos.
+          Participa en misiones, actividades y campañas de reciclaje para canjearlos por beneficios
           como descuentos en matrícula, premios ecológicos y mucho más.
         </p>
 
         <div class="flex flex-wrap gap-3 mb-6">
           <a href="autenticacion.html"
-             class="px-5 py-2.5 rounded-full bg-emerald-500 text-slate-950 text-sm font-semibold hover:bg-emerald-400">
+            class="px-5 py-2.5 rounded-full bg-emerald-500 text-slate-950 text-sm font-semibold hover:bg-emerald-400">
             Iniciar sesión con tu cédula
           </a>
           <a href="#como-funciona"
-             class="px-5 py-2.5 rounded-full border border-emerald-500/70 text-sm text-emerald-700 dark:text-emerald-100 hover:bg-emerald-500/10">
+            class="px-5 py-2.5 rounded-full border border-emerald-500/70 text-sm text-emerald-700 dark:text-emerald-100 hover:bg-emerald-500/10">
             Ver cómo funciona
           </a>
         </div>
 
-        
+
 
         <div class="grid grid-cols-3 gap-4 text-xs">
-          <div class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-xl p-3">
+          <div
+            class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-xl p-3">
             <p class="text-emerald-700/80 dark:text-emerald-200/80">Botellas recicladas</p>
             <p class="text-xl font-bold text-emerald-600 dark:text-emerald-300">12 430+</p>
           </div>
-          <div class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-xl p-3">
+          <div
+            class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-xl p-3">
             <p class="text-emerald-700/80 dark:text-emerald-200/80">Estudiantes activos</p>
             <p class="text-xl font-bold text-emerald-600 dark:text-emerald-300">820</p>
           </div>
-          <div class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-xl p-3">
+          <div
+            class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-xl p-3">
             <p class="text-emerald-700/80 dark:text-emerald-200/80">Kg de CO₂ evitados</p>
             <p class="text-xl font-bold text-emerald-600 dark:text-emerald-300">2 100+</p>
           </div>
@@ -203,7 +218,8 @@
       </div>
 
       <div class="space-y-4">
-        <div class="bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-emerald-800/60 rounded-2xl p-4">
+        <div
+          class="bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-emerald-800/60 rounded-2xl p-4">
           <p class="text-sm font-semibold text-emerald-800 dark:text-emerald-100 mb-2">Tu progreso ambiental</p>
           <div class="space-y-3">
             <div>
@@ -231,190 +247,213 @@
     </section>
 
     <!-- Problema y Solución -->
-<section id="problema-solucion" class="mt-16 bg-gradient-to-br from-slate-50 to-emerald-50/30 dark:from-slate-900/50 dark:to-emerald-950/20 rounded-3xl border border-slate-200 dark:border-emerald-800/60 p-8 md:p-12">
-  <div class="max-w-5xl mx-auto">
-    <!-- El Problema -->
-    <div class="mb-12">
-      <div class="inline-block px-4 py-1.5 rounded-full bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-700/60 mb-4">
-        <span class="text-xs font-semibold text-red-700 dark:text-red-300 uppercase tracking-wider">⚠️ El Problema</span>
-      </div>
-      
-      <h3 class="text-2xl md:text-3xl font-bold text-emerald-900 dark:text-emerald-100 mb-4">
-        La incorrecta separación de residuos en campus universitarios
-      </h3>
-      
-      <p class="text-base text-emerald-800/90 dark:text-emerald-100/90 mb-4 leading-relaxed">
-        Los campus universitarios generan una cantidad significativa de residuos diariamente. Aunque las instituciones 
-        implementan campañas de educación ambiental, <strong>la participación activa de los estudiantes suele ser limitada 
-        y altamente variable</strong>. Esto provoca fallas frecuentes en la clasificación en la fuente, afectando la 
-        eficiencia del reciclaje.
-      </p>
-      
-      <p class="text-base text-emerald-800/90 dark:text-emerald-100/90 mb-6 leading-relaxed">
-        Aunque la comunidad estudiantil suele conocer las prácticas básicas de reciclaje, sus conductas no reflejan 
-        este conocimiento debido a <strong>la falta de incentivos tangibles, seguimiento y retroalimentación inmediata</strong>.
-      </p>
-      
-      <!-- Estadísticas del problema -->
-      <div class="grid md:grid-cols-3 gap-4 mt-6">
-        <div class="bg-white/60 dark:bg-slate-800/40 rounded-xl p-4 border border-red-200 dark:border-red-900/40">
-          <p class="text-3xl font-bold text-red-600 dark:text-red-400 mb-1">Bajo</p>
-          <p class="text-sm text-emerald-800/80 dark:text-emerald-200/80">
-            Nivel de participación efectiva en programas tradicionales de reciclaje
+    <section id="problema-solucion"
+      class="mt-16 bg-gradient-to-br from-slate-50 to-emerald-50/30 dark:from-slate-900/50 dark:to-emerald-950/20 rounded-3xl border border-slate-200 dark:border-emerald-800/60 p-8 md:p-12">
+      <div class="max-w-5xl mx-auto">
+        <!-- El Problema -->
+        <div class="mb-12">
+          <div
+            class="inline-block px-4 py-1.5 rounded-full bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-700/60 mb-4">
+            <span class="text-xs font-semibold text-red-700 dark:text-red-300 uppercase tracking-wider">⚠️ El
+              Problema</span>
+          </div>
+
+          <h3 class="text-2xl md:text-3xl font-bold text-emerald-900 dark:text-emerald-100 mb-4">
+            La incorrecta separación de residuos en campus universitarios
+          </h3>
+
+          <p class="text-base text-emerald-800/90 dark:text-emerald-100/90 mb-4 leading-relaxed">
+            Los campus universitarios generan una cantidad significativa de residuos diariamente. Aunque las
+            instituciones
+            implementan campañas de educación ambiental, <strong>la participación activa de los estudiantes suele ser
+              limitada
+              y altamente variable</strong>. Esto provoca fallas frecuentes en la clasificación en la fuente, afectando
+            la
+            eficiencia del reciclaje.
           </p>
-        </div>
-        
-        <div class="bg-white/60 dark:bg-slate-800/40 rounded-xl p-4 border border-red-200 dark:border-red-900/40">
-          <p class="text-3xl font-bold text-red-600 dark:text-red-400 mb-1">0</p>
-          <p class="text-sm text-emerald-800/80 dark:text-emerald-200/80">
-            Incentivos tangibles que motiven cambios de comportamiento sostenidos
+
+          <p class="text-base text-emerald-800/90 dark:text-emerald-100/90 mb-6 leading-relaxed">
+            Aunque la comunidad estudiantil suele conocer las prácticas básicas de reciclaje, sus conductas no reflejan
+            este conocimiento debido a <strong>la falta de incentivos tangibles, seguimiento y retroalimentación
+              inmediata</strong>.
           </p>
+
+          <!-- Estadísticas del problema -->
+          <div class="grid md:grid-cols-3 gap-4 mt-6">
+            <div class="bg-white/60 dark:bg-slate-800/40 rounded-xl p-4 border border-red-200 dark:border-red-900/40">
+              <p class="text-3xl font-bold text-red-600 dark:text-red-400 mb-1">Bajo</p>
+              <p class="text-sm text-emerald-800/80 dark:text-emerald-200/80">
+                Nivel de participación efectiva en programas tradicionales de reciclaje
+              </p>
+            </div>
+
+            <div class="bg-white/60 dark:bg-slate-800/40 rounded-xl p-4 border border-red-200 dark:border-red-900/40">
+              <p class="text-3xl font-bold text-red-600 dark:text-red-400 mb-1">0</p>
+              <p class="text-sm text-emerald-800/80 dark:text-emerald-200/80">
+                Incentivos tangibles que motiven cambios de comportamiento sostenidos
+              </p>
+            </div>
+
+            <div class="bg-white/60 dark:bg-slate-800/40 rounded-xl p-4 border border-red-200 dark:border-red-900/40">
+              <p class="text-3xl font-bold text-red-600 dark:text-red-400 mb-1">Alta</p>
+              <p class="text-sm text-emerald-800/80 dark:text-emerald-200/80">
+                Variabilidad en la correcta separación de residuos en la fuente
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-6 bg-red-50 dark:bg-red-950/30 border-l-4 border-red-500 dark:border-red-700 rounded-r-xl p-4">
+            <p class="text-sm text-red-800 dark:text-red-200">
+              <strong>🔍 Diagnóstico:</strong> En la mayoría de los casos, la falta de incentivos tangibles y
+              retroalimentación inmediata reduce el interés por adoptar prácticas sostenibles. Los estudiantes
+              no encuentran motivación suficiente para cambiar sus hábitos ambientales.
+            </p>
+          </div>
         </div>
-        
-        <div class="bg-white/60 dark:bg-slate-800/40 rounded-xl p-4 border border-red-200 dark:border-red-900/40">
-          <p class="text-3xl font-bold text-red-600 dark:text-red-400 mb-1">Alta</p>
-          <p class="text-sm text-emerald-800/80 dark:text-emerald-200/80">
-            Variabilidad en la correcta separación de residuos en la fuente
+
+        <!-- Divisor visual -->
+        <div class="flex items-center gap-4 my-12">
+          <div
+            class="flex-1 h-px bg-gradient-to-r from-transparent via-emerald-300 dark:via-emerald-700 to-transparent">
+          </div>
+          <div class="px-4 py-2 rounded-full bg-emerald-500/20 border border-emerald-400 dark:border-emerald-600">
+            <span class="text-2xl">💡</span>
+          </div>
+          <div
+            class="flex-1 h-px bg-gradient-to-r from-transparent via-emerald-300 dark:via-emerald-700 to-transparent">
+          </div>
+        </div>
+
+        <!-- La Solución -->
+        <div>
+          <div
+            class="inline-block px-4 py-1.5 rounded-full bg-emerald-100 dark:bg-emerald-900/30 border border-emerald-300 dark:border-emerald-700/60 mb-4">
+            <span class="text-xs font-semibold text-emerald-700 dark:text-emerald-300 uppercase tracking-wider">✅
+              Nuestra Solución</span>
+          </div>
+
+          <h3 class="text-2xl md:text-3xl font-bold text-emerald-900 dark:text-emerald-100 mb-4">
+            Gamificación + Validación Digital = Cambio Real
+          </h3>
+
+          <p class="text-base text-emerald-800/90 dark:text-emerald-100/90 mb-4 leading-relaxed">
+            <strong>Eco-Puntos</strong> aborda este problema mediante la integración de <strong>gamificación y
+              validación digital</strong>.
+            La plataforma proporciona misiones, recompensas y un seguimiento individual del progreso ambiental, mientras
+            que
+            un panel administrativo asegura la legitimidad de cada acción mediante la revisión de evidencias.
           </p>
-        </div>
-      </div>
-      
-      <div class="mt-6 bg-red-50 dark:bg-red-950/30 border-l-4 border-red-500 dark:border-red-700 rounded-r-xl p-4">
-        <p class="text-sm text-red-800 dark:text-red-200">
-          <strong>🔍 Diagnóstico:</strong> En la mayoría de los casos, la falta de incentivos tangibles y 
-          retroalimentación inmediata reduce el interés por adoptar prácticas sostenibles. Los estudiantes 
-          no encuentran motivación suficiente para cambiar sus hábitos ambientales.
-        </p>
-      </div>
-    </div>
-    
-    <!-- Divisor visual -->
-    <div class="flex items-center gap-4 my-12">
-      <div class="flex-1 h-px bg-gradient-to-r from-transparent via-emerald-300 dark:via-emerald-700 to-transparent"></div>
-      <div class="px-4 py-2 rounded-full bg-emerald-500/20 border border-emerald-400 dark:border-emerald-600">
-        <span class="text-2xl">💡</span>
-      </div>
-      <div class="flex-1 h-px bg-gradient-to-r from-transparent via-emerald-300 dark:via-emerald-700 to-transparent"></div>
-    </div>
-    
-    <!-- La Solución -->
-    <div>
-      <div class="inline-block px-4 py-1.5 rounded-full bg-emerald-100 dark:bg-emerald-900/30 border border-emerald-300 dark:border-emerald-700/60 mb-4">
-        <span class="text-xs font-semibold text-emerald-700 dark:text-emerald-300 uppercase tracking-wider">✅ Nuestra Solución</span>
-      </div>
-      
-      <h3 class="text-2xl md:text-3xl font-bold text-emerald-900 dark:text-emerald-100 mb-4">
-        Gamificación + Validación Digital = Cambio Real
-      </h3>
-      
-      <p class="text-base text-emerald-800/90 dark:text-emerald-100/90 mb-4 leading-relaxed">
-        <strong>Eco-Puntos</strong> aborda este problema mediante la integración de <strong>gamificación y validación digital</strong>. 
-        La plataforma proporciona misiones, recompensas y un seguimiento individual del progreso ambiental, mientras que 
-        un panel administrativo asegura la legitimidad de cada acción mediante la revisión de evidencias.
-      </p>
-      
-      <p class="text-base text-emerald-800/90 dark:text-emerald-100/90 mb-6 leading-relaxed">
-        Utilizamos elementos propios del diseño de videojuegos —como puntos, niveles y retroalimentación inmediata— 
-        en actividades ambientales. Esta estrategia ha demostrado aumentar la motivación, la participación continua 
-        y la formación de hábitos sostenibles, especialmente en entornos educativos.
-      </p>
-      
-      <!-- Componentes de la solución -->
-      <div class="grid md:grid-cols-2 gap-6 mt-8">
-        <!-- Componente 1 -->
-        <div class="bg-white dark:bg-slate-800/60 rounded-2xl p-6 border border-emerald-200 dark:border-emerald-800/60 shadow-lg">
-          <div class="flex items-start gap-4">
-            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
-              <span class="text-2xl">🎮</span>
+
+          <p class="text-base text-emerald-800/90 dark:text-emerald-100/90 mb-6 leading-relaxed">
+            Utilizamos elementos propios del diseño de videojuegos —como puntos, niveles y retroalimentación inmediata—
+            en actividades ambientales. Esta estrategia ha demostrado aumentar la motivación, la participación continua
+            y la formación de hábitos sostenibles, especialmente en entornos educativos.
+          </p>
+
+          <!-- Componentes de la solución -->
+          <div class="grid md:grid-cols-2 gap-6 mt-8">
+            <!-- Componente 1 -->
+            <div
+              class="bg-white dark:bg-slate-800/60 rounded-2xl p-6 border border-emerald-200 dark:border-emerald-800/60 shadow-lg">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                  <span class="text-2xl">🎮</span>
+                </div>
+                <div>
+                  <h4 class="font-bold text-emerald-900 dark:text-emerald-100 mb-2">Sistema de Misiones</h4>
+                  <p class="text-sm text-emerald-800/80 dark:text-emerald-200/80">
+                    Tareas ambientales concretas con recompensas en puntos. Cada misión conecta la teoría
+                    con acciones verificables en espacios físicos del campus.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div>
-              <h4 class="font-bold text-emerald-900 dark:text-emerald-100 mb-2">Sistema de Misiones</h4>
-              <p class="text-sm text-emerald-800/80 dark:text-emerald-200/80">
-                Tareas ambientales concretas con recompensas en puntos. Cada misión conecta la teoría 
-                con acciones verificables en espacios físicos del campus.
-              </p>
+
+            <!-- Componente 2 -->
+            <div
+              class="bg-white dark:bg-slate-800/60 rounded-2xl p-6 border border-emerald-200 dark:border-emerald-800/60 shadow-lg">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                  <span class="text-2xl">✓</span>
+                </div>
+                <div>
+                  <h4 class="font-bold text-emerald-900 dark:text-emerald-100 mb-2">Validación de Evidencias</h4>
+                  <p class="text-sm text-emerald-800/80 dark:text-emerald-200/80">
+                    Panel administrativo donde moderadores revisan fotos y QR antes de otorgar puntos,
+                    asegurando la veracidad de las acciones realizadas.
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        
-        <!-- Componente 2 -->
-        <div class="bg-white dark:bg-slate-800/60 rounded-2xl p-6 border border-emerald-200 dark:border-emerald-800/60 shadow-lg">
-          <div class="flex items-start gap-4">
-            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
-              <span class="text-2xl">✓</span>
+
+            <!-- Componente 3 -->
+            <div
+              class="bg-white dark:bg-slate-800/60 rounded-2xl p-6 border border-emerald-200 dark:border-emerald-800/60 shadow-lg">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                  <span class="text-2xl">📊</span>
+                </div>
+                <div>
+                  <h4 class="font-bold text-emerald-900 dark:text-emerald-100 mb-2">Dashboard Personalizado</h4>
+                  <p class="text-sm text-emerald-800/80 dark:text-emerald-200/80">
+                    Visualización en tiempo real del progreso individual con métricas dinámicas,
+                    niveles y estadísticas de impacto ambiental personal.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div>
-              <h4 class="font-bold text-emerald-900 dark:text-emerald-100 mb-2">Validación de Evidencias</h4>
-              <p class="text-sm text-emerald-800/80 dark:text-emerald-200/80">
-                Panel administrativo donde moderadores revisan fotos y QR antes de otorgar puntos, 
-                asegurando la veracidad de las acciones realizadas.
-              </p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Componente 3 -->
-        <div class="bg-white dark:bg-slate-800/60 rounded-2xl p-6 border border-emerald-200 dark:border-emerald-800/60 shadow-lg">
-          <div class="flex items-start gap-4">
-            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
-              <span class="text-2xl">📊</span>
-            </div>
-            <div>
-              <h4 class="font-bold text-emerald-900 dark:text-emerald-100 mb-2">Dashboard Personalizado</h4>
-              <p class="text-sm text-emerald-800/80 dark:text-emerald-200/80">
-                Visualización en tiempo real del progreso individual con métricas dinámicas, 
-                niveles y estadísticas de impacto ambiental personal.
-              </p>
+
+            <!-- Componente 4 -->
+            <div
+              class="bg-white dark:bg-slate-800/60 rounded-2xl p-6 border border-emerald-200 dark:border-emerald-800/60 shadow-lg">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                  <span class="text-2xl">🎁</span>
+                </div>
+                <div>
+                  <h4 class="font-bold text-emerald-900 dark:text-emerald-100 mb-2">Recompensas Tangibles</h4>
+                  <p class="text-sm text-emerald-800/80 dark:text-emerald-200/80">
+                    Los puntos pueden canjearse por beneficios reales como descuentos en matrícula,
+                    productos ecológicos y reconocimientos institucionales.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <!-- Componente 4 -->
-        <div class="bg-white dark:bg-slate-800/60 rounded-2xl p-6 border border-emerald-200 dark:border-emerald-800/60 shadow-lg">
-          <div class="flex items-start gap-4">
-            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
-              <span class="text-2xl">🎁</span>
-            </div>
-            <div>
-              <h4 class="font-bold text-emerald-900 dark:text-emerald-100 mb-2">Recompensas Tangibles</h4>
-              <p class="text-sm text-emerald-800/80 dark:text-emerald-200/80">
-                Los puntos pueden canjearse por beneficios reales como descuentos en matrícula, 
-                productos ecológicos y reconocimientos institucionales.
-              </p>
+
+          <!-- Fundamentación científica -->
+          <div
+            class="mt-8 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/60 rounded-xl p-5">
+            <div class="flex items-start gap-3">
+              <span class="text-2xl flex-shrink-0">📚</span>
+              <div>
+                <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">Fundamentación Teórica</h5>
+                <p class="text-sm text-blue-800 dark:text-blue-200 leading-relaxed">
+                  <strong>Deterding et al. (2011)</strong> definen la gamificación como el uso de elementos de diseño de
+                  videojuegos
+                  en contextos no lúdicos. <strong>Kapp (2012)</strong> demostró que esta estrategia aumenta la
+                  motivación y
+                  formación de hábitos en entornos educativos. <strong>Revilla et al. (2021)</strong> confirmaron que
+                  los
+                  estudiantes poseen conocimientos pero carecen de motivación constante para aplicarlos.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      
-      <!-- Fundamentación científica -->
-      <div class="mt-8 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/60 rounded-xl p-5">
-        <div class="flex items-start gap-3">
-          <span class="text-2xl flex-shrink-0">📚</span>
-          <div>
-            <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">Fundamentación Teórica</h5>
-            <p class="text-sm text-blue-800 dark:text-blue-200 leading-relaxed">
-              <strong>Deterding et al. (2011)</strong> definen la gamificación como el uso de elementos de diseño de videojuegos 
-              en contextos no lúdicos. <strong>Kapp (2012)</strong> demostró que esta estrategia aumenta la motivación y 
-              formación de hábitos en entornos educativos. <strong>Revilla et al. (2021)</strong> confirmaron que los 
-              estudiantes poseen conocimientos pero carecen de motivación constante para aplicarlos.
+
+          <!-- CTA -->
+          <div class="mt-8 text-center">
+            <a href="autenticacion.html"
+              class="inline-block px-8 py-3.5 rounded-full bg-emerald-500 text-slate-950 text-base font-bold hover:bg-emerald-400 transition shadow-xl shadow-emerald-500/30 hover:shadow-2xl hover:shadow-emerald-500/40 hover:-translate-y-0.5">
+              Comienza a generar impacto hoy
+            </a>
+            <p class="text-xs text-emerald-700/70 dark:text-emerald-200/70 mt-3">
+              Únete a cientos de estudiantes que ya están marcando la diferencia
             </p>
           </div>
         </div>
       </div>
-      
-      <!-- CTA -->
-      <div class="mt-8 text-center">
-        <a href="autenticacion.html"
-           class="inline-block px-8 py-3.5 rounded-full bg-emerald-500 text-slate-950 text-base font-bold hover:bg-emerald-400 transition shadow-xl shadow-emerald-500/30 hover:shadow-2xl hover:shadow-emerald-500/40 hover:-translate-y-0.5">
-          Comienza a generar impacto hoy
-        </a>
-        <p class="text-xs text-emerald-700/70 dark:text-emerald-200/70 mt-3">
-          Únete a cientos de estudiantes que ya están marcando la diferencia
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
     <!-- Cómo funciona -->
     <section id="como-funciona" class="mt-16">
@@ -422,21 +461,24 @@
         ¿Cómo funciona EcoCampusCR?
       </h3>
       <div class="grid md:grid-cols-3 gap-6 text-sm">
-        <div class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-2xl p-4">
+        <div
+          class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-2xl p-4">
           <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-300 mb-1">Paso 1</p>
           <h4 class="font-semibold text-emerald-800 dark:text-emerald-100 mb-2">Inicia sesión</h4>
           <p class="text-emerald-700/80 dark:text-emerald-200/80">
             Entra con tu cédula y contraseña para acceder a tu perfil, misiones y puntos.
           </p>
         </div>
-        <div class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-2xl p-4">
+        <div
+          class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-2xl p-4">
           <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-300 mb-1">Paso 2</p>
           <h4 class="font-semibold text-emerald-800 dark:text-emerald-100 mb-2">Completa misiones</h4>
           <p class="text-emerald-700/80 dark:text-emerald-200/80">
             Recicla, participa en campañas y asiste a actividades. Tu profesor o moderador validará tu participación.
           </p>
         </div>
-        <div class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-2xl p-4">
+        <div
+          class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-2xl p-4">
           <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-300 mb-1">Paso 3</p>
           <h4 class="font-semibold text-emerald-800 dark:text-emerald-100 mb-2">Canjea tus puntos</h4>
           <p class="text-emerald-700/80 dark:text-emerald-200/80">
@@ -447,57 +489,58 @@
     </section>
 
     <!-- Eventos / Actividades con Carrusel -->
-<section id="eventos" class="mt-16">
-  <div class="flex justify-between items-center mb-4">
-    <h3 class="text-xl font-semibold text-emerald-800 dark:text-emerald-100">Próximas actividades</h3>
-    <p class="text-xs text-emerald-700/80 dark:text-emerald-200/80">Conéctate con tu campus y el ambiente.</p>
-  </div>
-  
-  <!-- Carrusel -->
-  <div class="relative">
-    <!-- Contenedor del carrusel -->
-    <div class="overflow-hidden">
-      <div id="carousel-container" class="transition-all duration-500">
-        <!-- Las tarjetas se cargarán dinámicamente aquí -->
+    <section id="eventos" class="mt-16">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold text-emerald-800 dark:text-emerald-100">Próximas actividades</h3>
+        <p class="text-xs text-emerald-700/80 dark:text-emerald-200/80">Conéctate con tu campus y el ambiente.</p>
       </div>
-    </div>
-    
-    <!-- Controles del carrusel -->
-    <button 
-      onclick="anteriorSlide()" 
-      class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-emerald-800/60 rounded-full p-3 shadow-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition z-10"
-      aria-label="Anterior">
-      <svg class="w-5 h-5 text-emerald-700 dark:text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-      </svg>
-    </button>
-    
-    <button 
-      onclick="siguienteSlide()" 
-      class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-emerald-800/60 rounded-full p-3 shadow-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition z-10"
-      aria-label="Siguiente">
-      <svg class="w-5 h-5 text-emerald-700 dark:text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-      </svg>
-    </button>
-    
-    <!-- Indicadores -->
-    <div class="flex justify-center gap-2 mt-6" id="carousel-indicators">
-      <!-- Los indicadores se cargarán dinámicamente aquí -->
-    </div>
-  </div>
-</section>
+
+      <!-- Carrusel -->
+      <div class="relative">
+        <!-- Contenedor del carrusel -->
+        <div class="overflow-hidden">
+          <div id="carousel-container" class="transition-all duration-500">
+            <!-- Las tarjetas se cargarán dinámicamente aquí -->
+          </div>
+        </div>
+
+        <!-- Controles del carrusel -->
+        <button onclick="anteriorSlide()"
+          class="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-14 bg-white dark:bg-slate-900 border border-slate-200 dark:border-emerald-800/60 rounded-full p-3 shadow-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition z-10"
+          aria-label="Anterior">
+          <svg class="w-5 h-5 text-emerald-700 dark:text-emerald-300" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+
+        <button onclick="siguienteSlide()"
+          class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-14 bg-white dark:bg-slate-900 border border-slate-200 dark:border-emerald-800/60 rounded-full p-3 shadow-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition z-10"
+          aria-label="Siguiente">
+          <svg class="w-5 h-5 text-emerald-700 dark:text-emerald-300" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+
+        <!-- Indicadores -->
+        <div class="flex justify-center gap-2 mt-6" id="carousel-indicators">
+          <!-- Los indicadores se cargarán dinámicamente aquí -->
+        </div>
+      </div>
+    </section>
 
     <!-- FAQ -->
     <section id="faq" class="mt-16 mb-10">
       <h3 class="text-xl font-semibold text-emerald-800 dark:text-emerald-100 mb-4">Preguntas frecuentes</h3>
       <div class="space-y-3 text-sm">
-        <details class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-xl p-3">
+        <details
+          class="bg-slate-100 dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-xl p-3">
           <summary class="cursor-pointer font-medium text-emerald-800 dark:text-emerald-100">
             ¿Quién valida mis puntos?
           </summary>
           <p class="mt-2 text-emerald-700/80 dark:text-emerald-200/80">
-            Los puntos son validados por moderadores o docentes responsables de cada actividad 
+            Los puntos son validados por moderadores o docentes responsables de cada actividad
             a través de formularios y listas de asistencia.
           </p>
         </details>
@@ -505,7 +548,8 @@
     </section>
   </main>
 
-  <footer class="border-t border-slate-200 dark:border-emerald-800/60 py-4 text-center text-xs text-emerald-700/80 dark:text-emerald-200/70">
+  <footer
+    class="border-t border-slate-200 dark:border-emerald-800/60 py-4 text-center text-xs text-emerald-700/80 dark:text-emerald-200/70">
     EcoCampusCR · Proyecto académico de gamificación ambiental · 2025
   </footer>
 
@@ -517,26 +561,27 @@
   <script src="json/misiones-eventos-dats.js"></script>
   <script src="JS/index-carousel.js"></script>
 
-<script>
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-  if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-
-    // Cerrar menú cuando se haga clic en un enlace
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
       });
-    });
-  }
-</script>
+
+      // Cerrar menú cuando se haga clic en un enlace
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+        });
+      });
+    }
+  </script>
 
 
 
-  
+
 </body>
+
 </html>

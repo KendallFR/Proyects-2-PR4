@@ -166,9 +166,13 @@ function agregarEventListenersBotones(tipo) {
    RENDERIZAR UNA MISIÓN
    ======================================== */
 function renderizarMision(mision, usuario) {
-    const tieneProgreso = mision.progreso !== null;
-    const porcentaje = tieneProgreso ? (mision.progreso.actual / mision.progreso.total) * 100 : 0;
-    const completada = tieneProgreso && mision.progreso.actual >= mision.progreso.total;
+    // Verificar si la misión ya fue completada por este usuario
+    const validaciones = JSON.parse(localStorage.getItem('validacionesPendientes') || '[]');
+    const misionCompletada = validaciones.some(v => 
+        v.usuarioCedula === usuario.cedula && 
+        v.itemId === mision.id && 
+        v.estado === 'aprobada'
+    );
     
     let html = `
         <div class="flex items-center justify-between p-3 rounded-xl bg-slate-100 dark:bg-slate-950/50 border border-slate-200 dark:border-emerald-900/80">
@@ -179,24 +183,6 @@ function renderizarMision(mision, usuario) {
                 <p class="text-xs text-emerald-800/80 dark:text-emerald-200/80">
                     ${mision.descripcion}
                 </p>
-    `;
-    
-    // Mostrar barra de progreso si existe
-    if (tieneProgreso) {
-        html += `
-                <div class="mt-2">
-                    <div class="flex justify-between text-[11px] text-emerald-800/80 dark:text-emerald-200/80 mb-1">
-                        <span>Progreso</span>
-                        <span>${mision.progreso.actual}/${mision.progreso.total}</span>
-                    </div>
-                    <div class="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full">
-                        <div class="h-1.5 bg-emerald-500 dark:bg-emerald-400 rounded-full" style="width: ${porcentaje}%;"></div>
-                    </div>
-                </div>
-        `;
-    }
-    
-    html += `
             </div>
             <div class="text-right">
                 <p class="text-[11px] text-emerald-800/70 dark:text-emerald-200/70">Recompensa</p>
@@ -204,7 +190,7 @@ function renderizarMision(mision, usuario) {
     `;
     
     // Botón según estado
-    if (completada) {
+    if (misionCompletada) {
         html += `
                 <button class="mt-2 text-[11px] px-3 py-1 rounded-full bg-slate-400 text-slate-950 cursor-not-allowed" disabled>
                     ¡Completada!
@@ -277,20 +263,14 @@ function renderizarEvento(evento) {
    ======================================== */
 function cargarDatosDashboard(usuario) {
     // Actualizar nombre del usuario en el header
-    const nombreUsuario = usuario.nombre.split(' ')[0]; // Solo el primer nombre
+    const nombreUsuario = usuario.nombre.split(' ')[0];
     const headerTitle = document.querySelector('main h2');
     if (headerTitle) {
         headerTitle.textContent = `Hola, ${nombreUsuario} 🌱`;
     }
     
     // Actualizar información de la sesión en el sidebar
-    const sessionInfo = document.querySelector('aside .border-t');
-    if (sessionInfo) {
-        sessionInfo.innerHTML = `
-            Sesión: <span class="font-semibold">${nombreUsuario}</span><br />
-            <span class="text-[11px] text-emerald-700/80 dark:text-emerald-200/70">Cédula: ${usuario.cedula}</span>
-        `;
-    }
+    actualizarInfoSesion(usuario);
     
     // Usar el nivel que ya tiene el usuario
     const nivel = usuario.nivel || 1;
@@ -300,7 +280,7 @@ function cargarDatosDashboard(usuario) {
     // Calcular puntos para siguiente nivel (cada 300 puntos = 1 nivel)
     const puntosParaSiguienteNivel = ((nivel * 300) - puntosTotales);
     
-    console.log('Nivel:', nivel, 'Puntos Totales:', puntosTotales, 'Puntos Actuales:', puntosActuales); // Debug
+    console.log('Nivel:', nivel, 'Puntos Totales:', puntosTotales, 'Puntos Actuales:', puntosActuales);
     
     // Actualizar nivel en el header
     const nivelDisplay = document.querySelector('header .text-right.text-xs');
@@ -312,14 +292,14 @@ function cargarDatosDashboard(usuario) {
         `;
     }
     
-    // Actualizar resumen de estadísticas
-    const estadisticas = document.querySelectorAll('section.grid.gap-4.md\\:grid-cols-3 > div');
+    // Actualizar resumen de estadísticas usando IDs específicos
     
     // Puntos actuales
-    if (estadisticas[0]) {
-        estadisticas[0].innerHTML = `
+    const statPuntos = document.getElementById('stat-puntos-actuales');
+    if (statPuntos) {
+        statPuntos.innerHTML = `
             <p class="text-xs text-emerald-800/80 dark:text-emerald-200/80">Puntos actuales</p>
-            <p class="text-3xl font-bold text-emerald-700 dark:text-emerald-300">${puntosActuales.toLocaleString()}</p>
+            <p class="text-2xl md:text-3xl font-bold text-emerald-700 dark:text-emerald-300">${puntosActuales.toLocaleString()}</p>
             <p class="text-xs text-emerald-800/70 dark:text-emerald-200/70 mt-1">
                 A ${puntosParaSiguienteNivel} puntos de tu próximo nivel.
             </p>
@@ -328,10 +308,11 @@ function cargarDatosDashboard(usuario) {
     
     // Botellas recicladas (calculadas basadas en puntos totales, 10 pts por botella)
     const botellasRecicladas = Math.floor(puntosTotales / 10);
-    if (estadisticas[1]) {
-        estadisticas[1].innerHTML = `
+    const statBotellas = document.getElementById('stat-botellas');
+    if (statBotellas) {
+        statBotellas.innerHTML = `
             <p class="text-xs text-emerald-800/80 dark:text-emerald-200/80">Botellas recicladas</p>
-            <p class="text-3xl font-bold text-emerald-700 dark:text-emerald-300">${botellasRecicladas}</p>
+            <p class="text-2xl md:text-3xl font-bold text-emerald-700 dark:text-emerald-300">${botellasRecicladas}</p>
             <p class="text-xs text-emerald-800/70 dark:text-emerald-200/70 mt-1">
                 Total acumulado.
             </p>
@@ -340,10 +321,11 @@ function cargarDatosDashboard(usuario) {
     
     // Actividades asistidas (calculadas basadas en nivel)
     const actividadesAsistidas = Math.max(1, Math.floor(nivel / 2));
-    if (estadisticas[2]) {
-        estadisticas[2].innerHTML = `
+    const statActividades = document.getElementById('stat-actividades');
+    if (statActividades) {
+        statActividades.innerHTML = `
             <p class="text-xs text-emerald-800/80 dark:text-emerald-200/80">Actividades asistidas</p>
-            <p class="text-3xl font-bold text-emerald-700 dark:text-emerald-300">${actividadesAsistidas}</p>
+            <p class="text-2xl md:text-3xl font-bold text-emerald-700 dark:text-emerald-300">${actividadesAsistidas}</p>
             <p class="text-xs text-emerald-800/70 dark:text-emerald-200/70 mt-1">
                 Validado por moderadores.
             </p>
@@ -718,6 +700,252 @@ function mostrarEnlaceAdmin() {
     const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
       header.insertBefore(btnAdmin, themeToggle);
+    }
+  }
+}
+/* ========================================
+   Control del menú móvil del dashboard
+   ======================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Referencias al DOM
+  const menuToggleMobile = document.getElementById('menu-toggle-mobile');
+  const mobileSidebar = document.getElementById('mobile-sidebar');
+  const mobileSidebarPanel = document.getElementById('mobile-sidebar-panel');
+  const closeMobileSidebar = document.getElementById('close-mobile-sidebar');
+  const sidebarOverlay = document.getElementById('sidebar-overlay');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+  // Función para abrir el menú
+  function abrirMenu() {
+    mobileSidebar.classList.remove('hidden');
+    // Pequeño delay para que la transición funcione
+    setTimeout(() => {
+      mobileSidebarPanel.classList.remove('-translate-x-full');
+    }, 10);
+    // Prevenir scroll del body
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Función para cerrar el menú
+  function cerrarMenu() {
+    mobileSidebarPanel.classList.add('-translate-x-full');
+    // Esperar a que termine la animación antes de ocultar
+    setTimeout(() => {
+      mobileSidebar.classList.add('hidden');
+      document.body.style.overflow = '';
+    }, 300);
+  }
+
+  // Event listeners
+  if (menuToggleMobile) {
+    menuToggleMobile.addEventListener('click', abrirMenu);
+  }
+
+  if (closeMobileSidebar) {
+    closeMobileSidebar.addEventListener('click', cerrarMenu);
+  }
+
+  if (sidebarOverlay) {
+    sidebarOverlay.addEventListener('click', cerrarMenu);
+  }
+
+  // Cerrar menú al hacer clic en un enlace de navegación
+  mobileNavLinks.forEach(link => {
+    link.addEventListener('click', cerrarMenu);
+  });
+
+  // Cerrar con tecla ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !mobileSidebar.classList.contains('hidden')) {
+      cerrarMenu();
+    }
+  });
+});
+
+/* ========================================
+   Sincronización de botones de tema
+   ======================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+  const themeToggleDesktop = document.getElementById('theme-toggle-desktop');
+  
+  const themeToggleLightMobile = document.getElementById('theme-toggle-light-mobile');
+  const themeToggleDarkMobile = document.getElementById('theme-toggle-dark-mobile');
+  
+  const themeToggleLightDesktop = document.getElementById('theme-toggle-light-desktop');
+  const themeToggleDarkDesktop = document.getElementById('theme-toggle-dark-desktop');
+
+  // Función para actualizar todos los botones de tema
+  function actualizarBotonesTema() {
+    const isDark = document.documentElement.classList.contains('dark');
+    
+    // Móvil
+    if (themeToggleLightMobile && themeToggleDarkMobile) {
+      if (isDark) {
+        themeToggleLightMobile.classList.remove('hidden');
+        themeToggleDarkMobile.classList.add('hidden');
+      } else {
+        themeToggleLightMobile.classList.add('hidden');
+        themeToggleDarkMobile.classList.remove('hidden');
+      }
+    }
+    
+    // Desktop
+    if (themeToggleLightDesktop && themeToggleDarkDesktop) {
+      if (isDark) {
+        themeToggleLightDesktop.classList.remove('hidden');
+        themeToggleDarkDesktop.classList.add('hidden');
+      } else {
+        themeToggleLightDesktop.classList.add('hidden');
+        themeToggleDarkDesktop.classList.remove('hidden');
+      }
+    }
+  }
+
+  // Escuchar cambios de tema desde theme.js
+  const observer = new MutationObserver(actualizarBotonesTema);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class']
+  });
+
+  // Sincronizar botón móvil con la función de cambio de tema
+  if (themeToggleMobile) {
+    themeToggleMobile.addEventListener('click', () => {
+      // Disparar el click del botón principal de tema si existe
+      const mainThemeToggle = document.getElementById('theme-toggle');
+      if (mainThemeToggle) {
+        mainThemeToggle.click();
+      } else {
+        // Si no existe, cambiar el tema manualmente
+        document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', 
+          document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+        );
+      }
+    });
+  }
+
+  // Sincronizar botón desktop
+  if (themeToggleDesktop) {
+    themeToggleDesktop.addEventListener('click', () => {
+      const mainThemeToggle = document.getElementById('theme-toggle');
+      if (mainThemeToggle) {
+        mainThemeToggle.click();
+      } else {
+        document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', 
+          document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+        );
+      }
+    });
+  }
+
+  // Inicializar estado de los botones
+  actualizarBotonesTema();
+});
+
+/* ========================================
+   Scroll suave para anclas (opcional)
+   ======================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const anchorLinks = document.querySelectorAll('a[href^="#"]');
+  
+  anchorLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      
+      if (href && href !== '#') {
+        e.preventDefault();
+        
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }
+    });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const menuToggleMobile = document.getElementById('menu-toggle-mobile');
+  const mobileSidebar = document.getElementById('mobile-sidebar');
+  const mainContent = document.querySelector('main');
+  
+  const observarMenuMobile = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === 'class') {
+        const menuEstaAbierto = !mobileSidebar.classList.contains('hidden');
+        
+        if (menuEstaAbierto) {
+          mainContent.style.zIndex = '0';
+        } else {
+          mainContent.style.zIndex = '';
+        }
+      }
+    });
+  });
+  
+  if (mobileSidebar) {
+    observarMenuMobile.observe(mobileSidebar, { attributes: true });
+  }
+});
+
+function eliminarSesionDuplicada() {
+  // Buscar el sidebar móvil
+  const mobileSidebarPanel = document.getElementById('mobile-sidebar-panel');
+  
+  if (!mobileSidebarPanel) return;
+  
+  // Buscar todos los divs con información de sesión
+  const sesionDivs = mobileSidebarPanel.querySelectorAll('.border-t.p-4');
+  
+  // Si hay más de uno, eliminar los duplicados (mantener solo el último)
+  if (sesionDivs.length > 1) {
+    for (let i = 0; i < sesionDivs.length - 1; i++) {
+      // Verificar que contiene "Sesión:" antes de eliminar
+      if (sesionDivs[i].textContent.includes('Sesión:')) {
+        sesionDivs[i].remove();
+      }
+    }
+  }
+}
+
+// Ejecutar al cargar
+document.addEventListener('DOMContentLoaded', () => {
+  eliminarSesionDuplicada();
+});
+
+
+function actualizarInfoSesion(usuario) {
+  const nombreUsuario = usuario.nombre.split(' ')[0];
+  
+  // Actualizar en sidebar DESKTOP
+  const sessionInfoDesktop = document.querySelector('aside.w-64 .border-t.p-4');
+  if (sessionInfoDesktop) {
+    sessionInfoDesktop.innerHTML = `
+      Sesión: <span class="font-semibold">${nombreUsuario}</span><br />
+      <span class="text-[11px] text-emerald-700/80 dark:text-emerald-200/70">Cédula: ${usuario.cedula}</span>
+    `;
+  }
+  
+  // Actualizar en sidebar MÓVIL 
+  const mobileSidebarPanel = document.getElementById('mobile-sidebar-panel');
+  if (mobileSidebarPanel) {
+    const sessionInfoMobile = mobileSidebarPanel.querySelector('.border-t.p-4');
+    if (sessionInfoMobile) {
+      sessionInfoMobile.innerHTML = `
+        Sesión: <span class="font-semibold">${nombreUsuario}</span><br />
+        <span class="text-[11px] text-emerald-700/80 dark:text-emerald-200/70">Cédula: ${usuario.cedula}</span>
+      `;
     }
   }
 }

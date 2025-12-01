@@ -144,24 +144,6 @@ function renderizarTarjetaMision(mision) {
                     ${mision.descripcion}
                 </p>
                 
-                ${tieneProgreso ? `
-                    <div class="mb-4">
-                        <div class="flex justify-between text-xs text-emerald-800/80 dark:text-emerald-200/80 mb-1.5">
-                            <span class="font-medium">Progreso de ejemplo</span>
-                            <span class="font-semibold">${mision.progreso.actual}/${mision.progreso.total}</span>
-                        </div>
-                        <div class="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
-                            <div class="h-full bg-emerald-500 dark:bg-emerald-400 rounded-full transition-all duration-500" style="width: ${porcentaje}%;"></div>
-                        </div>
-                    </div>
-                ` : ''}
-                
-                <div class="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/60 rounded-lg p-3 mb-4">
-                    <p class="text-xs text-blue-800 dark:text-blue-200">
-                        <strong>Validación:</strong> ${mision.validacion.requerimiento}
-                    </p>
-                </div>
-                
                 <div class="mt-auto">
                     <a href="autenticacion.html"
                        class="inline-block w-full text-center text-sm px-4 py-2.5 rounded-full bg-emerald-500 text-slate-950 font-semibold hover:bg-emerald-400 transition">

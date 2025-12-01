@@ -107,10 +107,11 @@
 
     <!-- Navegación escritorio -->
     <nav class="hidden md:flex items-center gap-6 text-sm">
-      <a href="index.html" class="hover:text-emerald-500 dark:hover:text-emerald-300 transition">Inicio</a>
-      <a href="acerca-de.html" class="hover:text-emerald-500 dark:hover:text-emerald-300 transition">Acerca de</a>
-      <a href="dashboard-estudiante.html" class="hover:text-emerald-500 dark:hover:text-emerald-300 transition">Dashboard</a>
-      <a href="recompensas.html" class="text-emerald-600 dark:text-emerald-400 font-semibold">Recompensas</a>
+      <a href="index.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
+      <a href="acerca-de.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
+      <a href="contacto.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
+      <a href="dashboard-estudiante.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Dashboard</a>
+      <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
     </nav>
 
     <!-- Área derecha -->
@@ -145,26 +146,42 @@
   </div>
 
 <!-- Menú móvil -->
-<div id="mobile-menu"
-     class="md:hidden hidden border-t border-slate-200 dark:border-emerald-800/60 bg-white/95 dark:bg-slate-950/95">
-  
-  <div class="px-4 pt-4 pb-2 border-b border-slate-200 dark:border-emerald-800/60 hidden" id="userSessionMobile">
-    <div class="flex items-center justify-between bg-emerald-100/50 dark:bg-emerald-900/20 px-4 py-3 rounded-xl">
-      <div class="flex flex-col gap-1">
-        <span class="text-sm font-semibold text-emerald-800 dark:text-emerald-100" id="userSessionNameMobile"></span>
-        <span class="text-xs px-3 py-1 rounded-full bg-white/80 dark:bg-slate-800/80 text-emerald-700 dark:text-emerald-300 font-semibold inline-block w-fit" id="userSessionPointsMobile">🌱 0</span>
-      </div>
-      <button class="text-xs px-4 py-2 rounded-full bg-red-500 text-white hover:bg-red-600 transition font-semibold" id="btnLogoutNavMobile">Salir</button>
-    </div>
-  </div>
+<div id="mobile-menu" class="md:hidden hidden border-t border-slate-200 dark:border-emerald-800/60 
+              bg-white/95 dark:bg-slate-950/95 shadow-lg">
 
-  <nav class="px-4 py-3 flex flex-col gap-3 text-sm">
-    <a href="index.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
-    <a href="acerca-de.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
-    <a href="dashboard-estudiante.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Dashboard</a>
-    <a href="recompensas.html" class="py-1 text-emerald-600 dark:text-emerald-400 font-semibold">Recompensas</a>
-  </nav>
-</div>
+      <div id="userSessionMobile" class="hidden flex-col gap-2 px-4 py-3 bg-emerald-100/40 dark:bg-emerald-900/20 
+              border-b border-emerald-300/40 dark:border-emerald-700/40">
+
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span id="userSessionNameMobile"
+              class="text-sm font-semibold text-emerald-800 dark:text-emerald-100"></span>
+            <span id="userSessionPointsMobile" class="text-xs px-2 py-0.5 rounded-full bg-white/70 dark:bg-slate-800/70 
+                     text-emerald-700 dark:text-emerald-300 font-semibold">
+              🌱 0
+            </span>
+          </div>
+
+          <button id="btnLogoutNavMobile" class="text-xs px-3 py-1.5 rounded-full bg-red-500 text-white 
+                     hover:bg-red-600 transition font-semibold">
+            Salir
+          </button>
+        </div>
+      </div>
+
+      <nav class="px-4 py-3 flex flex-col gap-2 text-sm">
+        <a href="index.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
+        <a href="acerca-de.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
+        <a href="contacto.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
+        <a href="dashboard-estudiante.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Dashboard</a>
+        <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
+
+        <a href="autenticacion.html" id="loginPromptMobile" class="mt-2 text-center text-sm px-4 py-2 rounded-full border border-emerald-500 
+                text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/10 transition">
+          Iniciar sesión
+        </a>
+      </nav>
+    </div>
 </header>
 
 <!-- Main Content -->
