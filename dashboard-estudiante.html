@@ -345,6 +345,142 @@
         </div>
       </section>
 
+      <!-- Diagrama Interactivo del Sistema -->
+      <section class="mb-6 md:mb-8">
+        <h3 class="text-lg md:text-xl font-semibold text-emerald-800 dark:text-emerald-100 mb-3 md:mb-4">
+          ¿Cómo funciona tu Dashboard?
+        </h3>
+
+        <div
+          class="bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-emerald-800/60 rounded-xl md:rounded-2xl p-4 md:p-6 overflow-hidden">
+          <!-- Diagrama -->
+          <div class="relative w-full min-h-[400px]">
+            <!-- Nivel 1: Usuario -->
+            <div class="flex justify-center mb-8">
+              <div
+                class="p-4 rounded-2xl text-center shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer hover:scale-105 bg-gradient-to-br from-emerald-500 to-teal-500 text-white"
+                data-info="estudiante">
+                <div class="text-3xl mb-2">👤</div>
+                <div class="text-sm font-semibold">Tú</div>
+                <div class="text-xs opacity-90">Estudiante</div>
+              </div>
+            </div>
+
+            <!-- Flecha hacia abajo -->
+            <div class="flex justify-center mb-8">
+              <svg class="w-8 h-8 text-emerald-500 dark:text-emerald-400 animate-bounce" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                </path>
+              </svg>
+            </div>
+
+            <!-- Nivel 2: Acciones -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+              <div
+                class="p-4 rounded-2xl text-center shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer hover:scale-105 bg-gradient-to-br from-blue-500 to-cyan-500 text-white"
+                data-info="misiones">
+                <div class="text-3xl mb-2">🎯</div>
+                <div class="text-sm font-semibold">Misiones</div>
+                <div class="text-xs opacity-90">Tareas diarias</div>
+              </div>
+
+              <div
+                class="p-4 rounded-2xl text-center shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer hover:scale-105 bg-gradient-to-br from-purple-500 to-pink-500 text-white"
+                data-info="eventos">
+                <div class="text-3xl mb-2">📅</div>
+                <div class="text-sm font-semibold">Eventos</div>
+                <div class="text-xs opacity-90">Actividades presenciales</div>
+              </div>
+
+              <div
+                class="p-4 rounded-2xl text-center shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer hover:scale-105 bg-gradient-to-br from-orange-500 to-yellow-500 text-white"
+                data-info="validacion">
+                <div class="text-3xl mb-2">✓</div>
+                <div class="text-sm font-semibold">Validación</div>
+                <div class="text-xs opacity-90">Sube evidencia</div>
+              </div>
+            </div>
+
+            <!-- Flecha hacia abajo -->
+            <div class="flex justify-center mb-8">
+              <svg class="w-8 h-8 text-emerald-500 dark:text-emerald-400 animate-bounce" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                </path>
+              </svg>
+            </div>
+
+            <!-- Nivel 3: Sistema -->
+            <div class="flex justify-center mb-8">
+              <div
+                class="p-4 rounded-2xl text-center shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer hover:scale-105 bg-gradient-to-br from-slate-700 to-slate-900 text-white"
+                data-info="sistema">
+                <div class="text-3xl mb-2">⚙️</div>
+                <div class="text-sm font-semibold">Sistema</div>
+                <div class="text-xs opacity-90">Procesa y valida</div>
+              </div>
+            </div>
+
+            <!-- Flecha hacia abajo -->
+            <div class="flex justify-center mb-8">
+              <svg class="w-8 h-8 text-emerald-500 dark:text-emerald-400 animate-bounce" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                </path>
+              </svg>
+            </div>
+
+            <!-- Nivel 4: Resultados -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div
+                class="p-3 rounded-xl text-center shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer hover:scale-105 bg-gradient-to-br from-green-500 to-emerald-500 text-white"
+                data-info="puntos">
+                <div class="text-2xl mb-1">🌱</div>
+                <div class="text-xs font-semibold">Puntos</div>
+              </div>
+
+              <div
+                class="p-3 rounded-xl text-center shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer hover:scale-105 bg-gradient-to-br from-amber-500 to-orange-500 text-white"
+                data-info="nivel">
+                <div class="text-2xl mb-1">📊</div>
+                <div class="text-xs font-semibold">Nivel</div>
+              </div>
+
+              <div
+                class="p-3 rounded-xl text-center shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer hover:scale-105 bg-gradient-to-br from-red-500 to-pink-500 text-white"
+                data-info="ranking">
+                <div class="text-2xl mb-1">🏆</div>
+                <div class="text-xs font-semibold">Ranking</div>
+              </div>
+
+              <div
+                class="p-3 rounded-xl text-center shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer hover:scale-105 bg-gradient-to-br from-violet-500 to-purple-500 text-white"
+                data-info="recompensas">
+                <div class="text-2xl mb-1">🎁</div>
+                <div class="text-xs font-semibold">Recompensas</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel de información -->
+          <div id="info-panel"
+            class="mt-6 p-4 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/60 rounded-lg hidden transition-all duration-300">
+            <h4 id="info-title" class="text-base font-semibold text-emerald-800 dark:text-emerald-100 mb-2"></h4>
+            <p id="info-description" class="text-sm text-emerald-800/80 dark:text-emerald-200/80"></p>
+          </div>
+
+          <!-- Nota informativa -->
+          <div
+            class="mt-4 p-3 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/60 rounded-lg">
+            <p class="text-xs text-blue-800 dark:text-blue-200">
+              💡 <strong>Tip:</strong> Haz clic en cualquier elemento del diagrama para conocer más detalles sobre cómo
+              funciona.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <!-- Misiones/Eventos y ranking -->
       <section class="grid gap-4 md:gap-6 lg:grid-cols-3">
         <!-- Misiones/Eventos -->
@@ -564,6 +700,67 @@
   <script src="json/misiones-eventos-dats.js"></script>
   <script src="js/dashboard.js"></script>
   <script src="js/dashboard-charts.js"></script>
+
+  <script>
+    // Información del diagrama
+    const diagramInfo = {
+      estudiante: {
+        title: '👤 Estudiante',
+        description: 'Eres el centro del sistema. Tu participación en actividades ambientales genera puntos y contribuye al impacto ecológico del campus.'
+      },
+      misiones: {
+        title: '🎯 Misiones',
+        description: 'Tareas diarias de reciclaje que puedes completar en cualquier momento. Sube una foto de tu evidencia para ganar puntos.'
+      },
+      eventos: {
+        title: '📅 Eventos',
+        description: 'Actividades presenciales organizadas por el campus. Inscríbete y asiste para ganar puntos mediante validación con código QR.'
+      },
+      validacion: {
+        title: '✓ Validación',
+        description: 'Sistema de verificación mediante fotos (misiones) o códigos QR (eventos). Los moderadores revisan tu evidencia antes de otorgar puntos.'
+      },
+      sistema: {
+        title: '⚙️ Sistema',
+        description: 'Procesa tus acciones, valida evidencias y calcula automáticamente tu progreso, nivel y posición en el ranking.'
+      },
+      puntos: {
+        title: '🌱 Puntos',
+        description: 'Acumula puntos por cada actividad validada. Los puntos determinan tu nivel y te permiten canjear recompensas.'
+      },
+      nivel: {
+        title: '📊 Nivel',
+        description: 'Tu nivel "Eco" aumenta conforme acumulas puntos. Cada nivel desbloquea nuevas recompensas y reconocimientos.'
+      },
+      ranking: {
+        title: '🏆 Ranking',
+        description: 'Compite con otros estudiantes. El ranking se actualiza en tiempo real según los puntos acumulados en la semana.'
+      },
+      recompensas: {
+        title: '🎁 Recompensas',
+        description: 'Canjea tus puntos por beneficios reales: descuentos en matrícula, productos ecológicos y reconocimientos institucionales.'
+      }
+    };
+
+    // Event listeners para los nodos
+    document.querySelectorAll('.diagram-node').forEach(node => {
+      node.addEventListener('click', function () {
+        const infoKey = this.getAttribute('data-info');
+        const info = diagramInfo[infoKey];
+
+        const panel = document.getElementById('info-panel');
+        const title = document.getElementById('info-title');
+        const description = document.getElementById('info-description');
+
+        title.textContent = info.title;
+        description.textContent = info.description;
+
+        panel.classList.remove('hidden');
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    });
+  </script>
+
 </body>
 
 </html>
