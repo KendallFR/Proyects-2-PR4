@@ -4,6 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Publicidad · EcoCampusCR</title>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config = { darkMode: 'class' }</script>
+
+<!-- Sistema de tema -->
+<script src="JS/theme.js"></script>
+
 
   <!-- Sky background (tu CSS) -->
   <link rel="stylesheet" href="css/sky.css">
@@ -444,15 +451,6 @@
     document.querySelector('.filter-btn[data-filter="all"]').classList.add('filter-active');
     renderAds(ads);
 
-    // El theme.js que proveíste controla el ícono y el modo; si quieres forzar icono inicial aquí:
-    (function updateThemeIcons(){
-      const lightIcon = document.getElementById('theme-toggle-light');
-      const darkIcon = document.getElementById('theme-toggle-dark');
-      if(!lightIcon || !darkIcon) return;
-      const isDark = document.documentElement.classList.contains('dark');
-      if(isDark){ darkIcon.classList.add('hidden'); lightIcon.classList.remove('hidden'); }
-      else { lightIcon.classList.add('hidden'); darkIcon.classList.remove('hidden'); }
-    })();
 
     // nota: session-navbar.js actualizará la info del header al cargarse la página
   </script>
