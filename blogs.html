@@ -550,15 +550,7 @@
       mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
     }
 
-    // Theme toggle behavior (in case theme.js not mounted yet)
-    const themeToggle = document.getElementById('theme-toggle');
-    if (themeToggle) {
-      themeToggle.addEventListener('click', () => {
-        document.documentElement.classList.toggle('dark');
-        localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-      });
-      if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
-    }
+    
   </script>
 </body>
 </html>
