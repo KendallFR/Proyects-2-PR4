@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Publicidad · EcoCampusCR</title>
+
+  <!-- Sky background (tu CSS) -->
+  <link rel="stylesheet" href="css/sky.css">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' }</script>
+
+  <style>
+    :root { --header-height: 4.5rem; } /* altura aproximada header (ajusta si tu header cambia) */
+    body { min-height: 100vh; }
+
+    /* imagenes */
+    .ad-img { height: 160px; object-fit: cover; display:block; width:100%; }
+    .card-max { max-width: 860px; }
+
+    /* sidebar sticky bajo el header */
+    .sticky-sidebar { position: sticky; top: calc(var(--header-height) + 1rem); }
+
+    /* modal debajo header (header tiene z más alto) */
+    #eventModal { z-index: 40; top: calc(var(--header-height)); }
+    #eventModal .modal-inner {
+      max-height: calc(100vh - var(--header-height) - 2rem);
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* bloquear scroll de fondo cuando modal abierto */
+    body.no-scroll { overflow: hidden; }
+
+    /* estilos visuales */
+    .filter-active { background: rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.25); }
+    .empty-note { background: rgba(226,232,240,0.6); padding: 1rem; border-radius: .75rem; }
+    .points-badge { background: linear-gradient(90deg,#10b981,#84cc16); color: #042; padding: 0.25rem 0.6rem; border-radius: 999px; font-weight:600; font-size: .85rem; }
+    header.site-header { z-index: 50; } /* header sobre modal */
+    /* pequeño responsive */
+    @media (max-width:640px){
+      :root { --header-height: 4.25rem; }
+      .ad-img { height: 140px; }
+    }
+  </style>
+</head>
+<body class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 min-h-screen relative overflow-x-hidden">
+
+  <!-- Fondos animados - usa tu css/sky.css (día/noche) -->
+  <div class="sky-layer sky-day dark:hidden">
+    <div class="cloud large" style="top: 10%; left: -10%; animation-delay: 0s;"></div>
+    <div class="cloud medium" style="top: 25%; left: 40%; animation-delay: 8s;"></div>
+    <div class="cloud small" style="top: 50%; left: 10%; animation-delay: 15s;"></div>
+    <div class="cloud medium" style="top: 65%; left: 70%; animation-delay: 22s;"></div>
+  </div>
+
+  <div class="sky-layer sky-night hidden dark:block">
+    <span class="star" style="top: 5%; left: 10%; animation-delay: 0.3s;"></span>
+    <span class="star" style="top: 12%; left: 55%; animation-delay: 1.2s;"></span>
+    <span class="star" style="top: 22%; left: 30%; animation-delay: 2.1s;"></span>
+    <span class="star" style="top: 28%; left: 80%; animation-delay: 0.9s;"></span>
+    <span class="star" style="top: 40%; left: 12%; animation-delay: 1.8s;"></span>
+    <span class="star" style="top: 47%; left: 60%; animation-delay: 2.7s;"></span>
+    <span class="star" style="top: 58%; left: 35%; animation-delay: 0.4s;"></span>
+    <span class="star" style="top: 62%; left: 85%; animation-delay: 1.5s;"></span>
+    <div class="shooting-star" style="top: 25%; left: 5%; animation-delay: 0s;"></div>
+  </div>
+
+  <!-- Header -->
+<header class="site-header border-b border-slate-200 dark:border-emerald-800/60 
+  bg-white/70 dark:bg-slate-950/70 sticky top-0 backdrop-blur-md z-[9999]">
+    <div class="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <div class="h-8 w-8 rounded-full bg-emerald-500/80 flex items-center justify-center text-slate-950 font-bold text-lg">♻️</div>
+        <div>
+          <h1 class="text-lg font-semibold text-emerald-700 dark:text-emerald-100 leading-none">EcoCampus<span class="text-emerald-500">CR</span></h1>
+          <p class="text-[10px] text-emerald-700/70 dark:text-emerald-200/70 mt-[1px]">Convierte tu reciclaje en recompensas</p>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-5 text-sm font-medium">
+        <a href="index.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
+        <a href="acerca-de.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
+        <a href="contacto.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
+        <a href="dashboard-estudiante.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Dashboard</a>
+        <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
+        <a href="eventos.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Eventos</a>
+
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <div id="userSession" class="hidden md:flex items-center gap-2 bg-emerald-100/40 dark:bg-emerald-900/20 px-2.5 py-1.5 rounded-full backdrop-blur-sm border border-emerald-300/40 dark:border-emerald-700/40">
+          <span id="userSessionName" class="text-sm font-semibold text-emerald-800 dark:text-emerald-100"></span>
+          <span id="userSessionPoints" class="text-[11px] px-2 py-0.5 rounded-full bg-white/70 dark:bg-slate-800/70 text-emerald-700 dark:text-emerald-300 font-semibold">🌱 0</span>
+          <button id="btnLogoutNav" class="text-[11px] px-2 py-1 rounded-full bg-red-500 text-white hover:bg-red-600 transition font-semibold">Salir</button>
+        </div>
+
+        <div id="loginPrompt">
+          <a href="autenticacion.html" class="hidden md:inline-block text-sm px-4 py-1.5 rounded-full bg-emerald-500 text-slate-950 font-semibold hover:bg-emerald-400 transition">Iniciar Sesión</a>
+        </div>
+
+        <button id="theme-toggle" class="p-2 rounded-full border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <span id="theme-toggle-light" class="hidden">☀️</span>
+          <span id="theme-toggle-dark">🌙</span>
+        </button>
+
+        <button id="menu-toggle" class="md:hidden p-2 rounded-full border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-lg">☰</button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden hidden border-t border-slate-200 dark:border-emerald-800/60 bg-white/95 dark:bg-slate-950/95 shadow-lg">
+      <div id="userSessionMobile" class="hidden flex-col gap-2 px-4 py-3 bg-emerald-100/40 dark:bg-emerald-900/20 border-b border-emerald-300/40 dark:border-emerald-700/40">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span id="userSessionNameMobile" class="text-sm font-semibold text-emerald-800 dark:text-emerald-100"></span>
+            <span id="userSessionPointsMobile" class="text-xs px-2 py-0.5 rounded-full bg-white/70 dark:bg-slate-800/70 text-emerald-700 dark:text-emerald-300 font-semibold">🌱 0</span>
+          </div>
+          <button id="btnLogoutNavMobile" class="text-xs px-3 py-1.5 rounded-full bg-red-500 text-white hover:bg-red-600 transition font-semibold">Salir</button>
+        </div>
+      </div>
+
+      <nav class="px-4 py-3 flex flex-col gap-2 text-sm">
+        <a href="index.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
+        <a href="acerca-de.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
+        <a href="contacto.html" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
+        <a href="#como-funciona" class="py-1 hover:text-emerald-500 dark:hover:text-emerald-300">Dashboard</a>
+        <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
+        <a href="autenticacion.html" id="loginPromptMobile" class="mt-2 text-center text-sm px-4 py-2 rounded-full border border-emerald-500 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/10 transition">Iniciar sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main content -->
+<main class="relative z-0 max-w-6xl mx-auto px-4 py-8">
+    <header class="mb-6">
+      <h2 class="text-2xl font-bold text-emerald-700 dark:text-emerald-100">Publicidad y actividades</h2>
+      <p class="text-sm text-emerald-700/80 dark:text-emerald-200/80">Aquí verás los eventos y actividades oficiales. Haz clic en "Unirse" para ir al formulario de inscripción.</p>
+    </header>
+
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Feed -->
+      <div class="md:col-span-2 space-y-4">
+        <!-- Controls -->
+        <div class="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 flex flex-col sm:flex-row gap-3 items-center">
+          <div class="flex-1 w-full">
+            <input id="searchInput" type="search" placeholder="Buscar actividad, título o descripción..." class="w-full px-4 py-2 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 focus:outline-none" />
+          </div>
+
+          <div class="flex items-center gap-2">
+            <select id="campusFilter" class="px-3 py-2 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 focus:outline-none text-sm">
+              <option value="all">Todos los campus</option>
+              <option value="central">Sede Central</option>
+              <option value="purral">Purral</option>
+              <option value="pavas">Pavas</option>
+              <option value="jardin-botanico">Jardín Botánico</option>
+              <option value="otras">Otras sedes</option>
+            </select>
+
+            <div class="hidden sm:flex items-center gap-2 text-sm text-slate-500">Filtrar:</div>
+
+            <div id="categoryBtns" class="flex gap-2">
+              <button class="filter-btn px-3 py-1 rounded-md border border-slate-200 text-sm" data-filter="all">Todos</button>
+              <button class="filter-btn px-3 py-1 rounded-md border border-slate-200 text-sm" data-filter="siembra">Siembra</button>
+              <button class="filter-btn px-3 py-1 rounded-md border border-slate-200 text-sm" data-filter="taller">Taller</button>
+              <button class="filter-btn px-3 py-1 rounded-md border border-slate-200 text-sm" data-filter="expo">Expo</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="resultsInfo" class="text-sm text-slate-600 dark:text-slate-300">Mostrando <span id="resultsCount">0</span> actividades</div>
+
+        <div id="adsList" class="space-y-4"></div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="space-y-4">
+        <div class="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 sticky-sidebar">
+          <h4 class="font-semibold text-emerald-700 mb-2">Destacados</h4>
+          <ul class="text-sm space-y-2 text-emerald-600">
+            <li>• Jornada Siembra · 12 dic</li>
+            <li>• Taller Compostaje · 18 dic</li>
+            <li>• Expo Eco · 02 ene</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <!-- Modal (debajo header) -->
+  <div id="eventModal" class="fixed inset-x-0 hidden items-start justify-center bg-black/60 px-4">
+    <div class="modal-inner bg-white dark:bg-slate-900 rounded-2xl max-w-3xl w-full p-6 border border-slate-200 dark:border-emerald-800/40">
+      <button id="closeEventModal" class="text-slate-400 hover:text-slate-600 float-right text-2xl">&times;</button>
+      <div id="eventModalContent" class="mt-3"></div>
+    </div>
+  </div>
+
+  <footer class="max-w-6xl mx-auto px-4 py-6 text-center text-xs text-emerald-700/80 dark:text-emerald-200/70">EcoCampusCR · Proyecto académico · 2025</footer>
+
+  <!-- scripts (usa tus archivos locales) -->
+  <script src="JS/theme.js"></script>
+  <script src="JS/sesion.js"></script>
+  <script src="JS/sesion-navbar.js"></script>
+
+  <script>
+    /* ============================
+       Datos de ejemplo (reemplaza por fetch si quieres)
+       ============================ */
+    const ads = [
+      {
+        id: 'a1',
+        date: '2025-06-03',
+        category: 'taller',
+        campus: 'jardin-botanico',
+        img: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1200&q=60',
+        title: 'Taller de Compostaje',
+        points: 150,
+        dateLabel: 'martes, 3 de junio de 2025',
+        timeLabel: '14:00 - 16:00',
+        place: 'Jardín Botánico',
+        capacity: { available: 18, total: 30 },
+        desc: 'Aprende a crear tu propio compost en casa. Incluye kit inicial gratuito.',
+        form: 'https://forms.gle/tu-form-de-ejemplo-2'
+      },
+      {
+        id: 'a2',
+        date: '2025-12-12',
+        category: 'siembra',
+        campus: 'central',
+        img: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1200&q=60',
+        title: 'Jornada de Siembra - Sede Central',
+        points: 200,
+        dateLabel: 'sábado, 12 de diciembre de 2025',
+        timeLabel: '08:00 - 11:00',
+        place: 'Sede Central',
+        capacity: { available: 120, total: 200 },
+        desc: 'Únete a la jornada de reforestación. Certificado y puntos por participación.',
+        form: 'https://forms.gle/tu-form-de-ejemplo-1'
+      }
+    ];
+
+    // ordena por fecha (desc)
+    ads.sort((a,b) => new Date(b.date) - new Date(a.date));
+
+    /* ============================
+       RENDER & FILTERS
+       ============================ */
+    const adsList = document.getElementById('adsList');
+    const eventModal = document.getElementById('eventModal');
+    const eventModalContent = document.getElementById('eventModalContent');
+    const closeEventModal = document.getElementById('closeEventModal');
+    const resultsCount = document.getElementById('resultsCount');
+    const searchInput = document.getElementById('searchInput');
+    const campusFilter = document.getElementById('campusFilter');
+
+    let currentCategory = 'all';
+
+    function renderAds(list){
+      adsList.innerHTML = '';
+      if(!list.length){
+        adsList.innerHTML = '<div class="empty-note">No se encontraron actividades con esos filtros.</div>';
+        resultsCount.textContent = 0;
+        return;
+      }
+
+      list.forEach(ad => {
+        const card = document.createElement('article');
+        card.className = 'bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden card-max';
+        card.innerHTML = `
+          <img src="${ad.img}" alt="${escapeHtml(ad.title)}" class="ad-img">
+          <div class="p-4">
+            <div class="flex items-start justify-between gap-3">
+              <div class="flex-1">
+                <div class="flex items-center justify-between gap-3">
+                  <h3 class="text-lg font-semibold text-emerald-700 dark:text-emerald-100">${escapeHtml(ad.title)}</h3>
+                  <div class="points-badge">${ad.points} pts</div>
+                </div>
+
+                <p class="text-xs text-slate-600 dark:text-slate-300 mb-2">${escapeHtml(ad.dateLabel)} · ${escapeHtml(ad.timeLabel)}</p>
+
+                <div class="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-300 mb-3">
+                  <div class="flex items-center gap-1"><span class="text-xs">📍</span><span>${escapeHtml(ad.place)}</span></div>
+                  <div class="flex items-center gap-1"><span class="text-xs">👥</span><span>${ad.capacity.available} cupos disponibles de ${ad.capacity.total}</span></div>
+                </div>
+
+                <p class="text-sm text-slate-700 dark:text-slate-300 mb-4">${escapeHtml(ad.desc)}</p>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3">
+              <button data-id="${ad.id}" class="view-more w-full sm:flex-1 px-4 py-3 rounded-md border border-slate-200 dark:border-slate-700 text-sm">Ver más</button>
+              <a href="${ad.form}" target="_blank" rel="noopener" class="join-btn w-full sm:flex-1 px-4 py-3 rounded-md bg-emerald-500 text-white text-center font-semibold hover:bg-emerald-400">Unirse</a>
+            </div>
+          </div>
+        `;
+        adsList.appendChild(card);
+      });
+
+      // listeners Ver más
+      document.querySelectorAll('.view-more').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = e.currentTarget.dataset.id;
+          const ad = ads.find(x=>x.id===id);
+          if(!ad) return;
+          eventModalContent.innerHTML = `
+            <img src="${ad.img}" class="w-full rounded-xl mb-4 object-cover" alt="${escapeHtml(ad.title)}">
+            <h3 class="text-xl font-semibold text-emerald-700 mb-2">${escapeHtml(ad.title)}</h3>
+            <p class="text-xs text-slate-500 mb-2">${escapeHtml(ad.dateLabel)} · ${escapeHtml(ad.timeLabel)} · <strong>${escapeHtml(ad.place)}</strong></p>
+            <p class="mb-2"><span class="points-badge mr-2">${ad.points} pts</span><span class="text-sm text-slate-700 dark:text-slate-300">👥 ${ad.capacity.available} / ${ad.capacity.total} cupos</span></p>
+            <p class="text-sm text-slate-700 dark:text-slate-300 mb-4">${escapeHtml(ad.desc)}</p>
+            <div class="flex gap-2 flex-col sm:flex-row">
+              <a href="${ad.form}" target="_blank" rel="noopener" class="w-full sm:flex-1 inline-block text-center px-4 py-3 rounded-full bg-emerald-500 text-white font-semibold">Unirse</a>
+              <button id="closeModalBtn" class="w-full sm:flex-1 px-4 py-3 rounded-full border border-slate-200 dark:border-slate-700 text-sm">Cerrar</button>
+            </div>
+          `;
+          // mostrar modal (debajo header)
+          eventModal.classList.remove('hidden'); eventModal.classList.add('flex');
+          document.body.classList.add('no-scroll');
+          document.getElementById('closeModalBtn')?.addEventListener('click', closeModal);
+        });
+      });
+
+      resultsCount.textContent = list.length;
+    }
+
+    function closeModal(){
+      eventModal.classList.add('hidden'); eventModal.classList.remove('flex');
+      document.body.classList.remove('no-scroll');
+      eventModalContent.innerHTML = '';
+    }
+
+    function escapeHtml(s=''){ return String(s)
+      .replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')
+      .replaceAll('"','&quot;').replaceAll("'","&#039;"); }
+
+    // filtros y buscador
+    function applyFilters(){
+      const query = searchInput.value.trim().toLowerCase();
+      const campus = campusFilter.value;
+      let filtered = ads.slice();
+
+      if(currentCategory !== 'all') filtered = filtered.filter(a => a.category === currentCategory);
+      if(campus !== 'all') filtered = filtered.filter(a => a.campus === campus || a.campus === campus.toLowerCase());
+      if(query) filtered = filtered.filter(a => (
+        a.title.toLowerCase().includes(query) ||
+        a.desc.toLowerCase().includes(query) ||
+        (a.place && a.place.toLowerCase().includes(query))
+      ));
+
+      filtered.sort((a,b) => new Date(b.date) - new Date(a.date));
+      renderAds(filtered);
+
+      // scroll al top de resultados (debajo header)
+      const top = adsList.getBoundingClientRect().top + window.scrollY - (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 110);
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+
+    // botones de categoria
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const f = btn.dataset.filter;
+        currentCategory = f;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('filter-active'));
+        btn.classList.add('filter-active');
+        applyFilters();
+      });
+    });
+
+    campusFilter.addEventListener('change', applyFilters);
+    let searchTimer;
+    searchInput.addEventListener('input', () => {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => applyFilters(), 250);
+    });
+
+    // listeners modal
+    closeEventModal?.addEventListener('click', closeModal);
+    eventModal.addEventListener('click', (e) => { if(e.target === eventModal) closeModal(); });
+
+    // mobile menu
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if(menuToggle && mobileMenu){
+      menuToggle.addEventListener('click', ()=> mobileMenu.classList.toggle('hidden'));
+      mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=> mobileMenu.classList.add('hidden')));
+    }
+
+    // Inicialización: marcar "Todos" y renderizar
+    document.querySelector('.filter-btn[data-filter="all"]').classList.add('filter-active');
+    renderAds(ads);
+
+    // El theme.js que proveíste controla el ícono y el modo; si quieres forzar icono inicial aquí:
+    (function updateThemeIcons(){
+      const lightIcon = document.getElementById('theme-toggle-light');
+      const darkIcon = document.getElementById('theme-toggle-dark');
+      if(!lightIcon || !darkIcon) return;
+      const isDark = document.documentElement.classList.contains('dark');
+      if(isDark){ darkIcon.classList.add('hidden'); lightIcon.classList.remove('hidden'); }
+      else { lightIcon.classList.add('hidden'); darkIcon.classList.remove('hidden'); }
+    })();
+
+    // nota: session-navbar.js actualizará la info del header al cargarse la página
+  </script>
+</body>
+</html>
