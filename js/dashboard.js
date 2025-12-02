@@ -718,24 +718,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Función para abrir el menú
   function abrirMenu() {
-    mobileSidebar.classList.remove('hidden');
-    // Pequeño delay para que la transición funcione
-    setTimeout(() => {
-      mobileSidebarPanel.classList.remove('-translate-x-full');
-    }, 10);
-    // Prevenir scroll del body
-    document.body.style.overflow = 'hidden';
-  }
-
-  // Función para cerrar el menú
-  function cerrarMenu() {
-    mobileSidebarPanel.classList.add('-translate-x-full');
-    // Esperar a que termine la animación antes de ocultar
-    setTimeout(() => {
-      mobileSidebar.classList.add('hidden');
-      document.body.style.overflow = '';
-    }, 300);
-  }
+  mobileSidebar.classList.remove('hidden');
+  setTimeout(() => {
+    mobileSidebarPanel.classList.remove('translate-x-full');
+  }, 10);
+  document.body.style.overflow = 'hidden';
+}
+ // Función para cerrar el menú
+function cerrarMenu() {
+  mobileSidebarPanel.classList.add('translate-x-full');
+  setTimeout(() => {
+    mobileSidebar.classList.add('hidden');
+    document.body.style.overflow = '';
+  }, 300);
+}
 
   // Event listeners
   if (menuToggleMobile) {
