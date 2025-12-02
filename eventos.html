@@ -19,40 +19,37 @@
   <link rel="stylesheet" href="css/sky.css">
 
 
-
-  <style>
-    :root { --header-height: 4.5rem; } /* altura aproximada header (ajusta si tu header cambia) */
+<style>
+    :root { --header-height: 4.5rem; }
     body { min-height: 100vh; }
 
-    /* imagenes */
-    .ad-img { height: 160px; object-fit: cover; display:block; width:100%; }
-    .card-max { max-width: 860px; }
+    header.site-header, header {
+      z-index: 100 !important; /* 🔥 Header encima de todo */
+    }
 
-    /* sidebar sticky bajo el header */
-    .sticky-sidebar { position: sticky; top: calc(var(--header-height) + 1rem); }
+    #eventModal {
+      z-index: 30 !important; /* modal debajo del header */
+      top: calc(var(--header-height));
+    }
 
-    /* modal debajo header (header tiene z más alto) */
-    #eventModal { z-index: 40; top: calc(var(--header-height)); }
     #eventModal .modal-inner {
       max-height: calc(100vh - var(--header-height) - 2rem);
       overflow: auto;
       -webkit-overflow-scrolling: touch;
     }
 
-    /* bloquear scroll de fondo cuando modal abierto */
-    body.no-scroll { overflow: hidden; }
+    .sticky-sidebar { position: sticky; top: calc(var(--header-height) + 1rem); }
 
-    /* estilos visuales */
-    .filter-active { background: rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.25); }
-    .empty-note { background: rgba(226,232,240,0.6); padding: 1rem; border-radius: .75rem; }
-    .points-badge { background: linear-gradient(90deg,#10b981,#84cc16); color: #042; padding: 0.25rem 0.6rem; border-radius: 999px; font-weight:600; font-size: .85rem; }
-    header.site-header { z-index: 50; } /* header sobre modal */
-    /* pequeño responsive */
-    @media (max-width:640px){
-      :root { --header-height: 4.25rem; }
-      .ad-img { height: 140px; }
+    .ad-img { height:160px; object-fit:cover; width:100%; }
+    .points-badge { background:linear-gradient(90deg,#10b981,#84cc16); color:#042; padding:4px 10px; border-radius:999px; font-weight:600; }
+    .filter-active { background:rgba(16,185,129,0.12); border-color:rgba(16,185,129,0.25); }
+
+    @media(max-width:640px){
+      :root { --header-height:4.25rem; }
+      .ad-img{ height:140px; }
     }
-  </style>
+</style>
+
 </head>
 <body class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 min-h-screen relative overflow-x-hidden">
 
@@ -196,10 +193,15 @@
 
   <!-- Main content -->
 <main class="relative z-0 max-w-6xl mx-auto px-4 py-8">
-    <header class="mb-6">
-      <h2 class="text-2xl font-bold text-emerald-700 dark:text-emerald-100">Publicidad y actividades</h2>
-      <p class="text-sm text-emerald-700/80 dark:text-emerald-200/80">Aquí verás los eventos y actividades oficiales. Haz clic en "Unirse" para ir al formulario de inscripción.</p>
-    </header>
+   <header class="mb-6 mt-6">
+  <h2 class="text-2xl font-bold text-emerald-700 dark:text-emerald-100">
+    Publicidad y actividades
+  </h2>
+  <p class="text-sm text-emerald-700/80 dark:text-emerald-200/80">
+    Aquí verás los eventos y actividades oficiales. Haz clic en "Unirse" para ir al formulario de inscripción.
+  </p>
+</header>
+
 
     <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <!-- Feed -->
@@ -261,9 +263,10 @@
   <footer class="max-w-6xl mx-auto px-4 py-6 text-center text-xs text-emerald-700/80 dark:text-emerald-200/70">EcoCampusCR · Proyecto académico · 2025</footer>
 
   <!-- scripts (usa tus archivos locales) -->
-  <script src="js/theme.js"></script>
-  <script src="js/sesion.js"></script>
-  <script src="js/sesion-navbar.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/sesion.js"></script>
+<script src="js/sesion-navbar.js"></script>
+
 
   <script>
     /* ============================
