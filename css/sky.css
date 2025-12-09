@@ -218,3 +218,56 @@ header {
     padding: 0;
   }
 }
+
+/* ---------- tarjetas (ok) ---------- */
+.ad-img {
+  width: 100%;
+  height: 180px;         /* ajústalo si quieres más/menos */
+  object-fit: cover;
+  display: block;
+}
+/* Fondo del modal: grid centrado para evitar interferencias con otros estilos */
+#adModal {
+  display: none;            /* se controla vía clases (hidden / show) */
+  /* fixed/inset-0 ya lo tienes en el HTML con clases Tailwind */
+}
+
+/* wrapper que centra el modal con grid y permite scroll del fondo con overlay completo */
+#adModal .ad-modal-wrapper {
+  position: absolute;
+  inset: 0;                 /* ocupa toda la ventana */
+  display: grid;
+  place-items: center;      /* centra vertical y horizontal */
+  padding: 2rem;            /* espacio en móviles */
+  overflow: auto;           /* si el modal es más alto, se hace scroll dentro del overlay */
+}
+
+/* modal-inner: ancho máximo y manejo del alto */
+#adModal .modal-inner {
+  max-width: 920px;         /* ancho máximo del modal */
+  width: 100%;
+  max-height: calc(100vh - 4rem); /* deja espacio sobre el header */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+}
+
+/* imagen dentro del modal: no permita romper layout */
+#adModal .modal-inner img,
+#adModal .modal-inner .modal-img {
+  width: 100%;
+  height: 280px;            /* ajusta según tu diseño */
+  max-height: 40vh;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+/* evita que la altura del contenido estire la imagen en pantallas pequeñas */
+@media (max-width: 640px){
+  #adModal .modal-inner img,
+  #adModal .modal-inner .modal-img { height: 160px; max-height: 35vh; }
+}
+
+/* mostrar/ocultar controlado por clases JS */
+#adModal.show { display: block; }        /* esto activa el overlay */

@@ -30,7 +30,7 @@
     }
   </script>
   
-   <style>
+  <style>
     /* Estilos para componentes externos que no se pueden hacer con Tailwind */
     
     /* Mapa de Leaflet */
@@ -61,7 +61,7 @@
       }
     }
     
-    /* Modal mejorado - centrado y responsivo */
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -72,35 +72,12 @@
       height: 100%;
       background: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(4px);
-      overflow-y: auto;
     }
     
     .modal.active {
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1rem;
-    }
-
-    .modal-content {
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-
-    /* Animación de entrada */
-    .modal.active .modal-content {
-      animation: modalFadeIn 0.3s ease-out;
-    }
-
-    @keyframes modalFadeIn {
-      from {
-        opacity: 0;
-        transform: scale(0.9);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
     }
     
     /* Comportamiento de sesión */
@@ -333,6 +310,7 @@
               id="name" 
               name="name" 
               placeholder="Tu nombre" 
+              required
               class="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
             />
             <span class="text-red-500 text-xs mt-1 hidden" id="nameError"></span>
@@ -347,6 +325,7 @@
               id="email" 
               name="email" 
               placeholder="tu@email.com" 
+              required
               class="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
             />
             <span class="text-red-500 text-xs mt-1 hidden" id="emailError"></span>
@@ -375,6 +354,7 @@
             <select 
               id="subject" 
               name="subject" 
+              required
               class="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
             >
               <option value="">Seleccione un asunto</option>
@@ -397,6 +377,7 @@
             name="message" 
             rows="5" 
             placeholder="Cuéntanos en qué podemos ayudarte..." 
+            required
             class="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition resize-vertical min-h-[150px]"
           ></textarea>
           <span class="text-red-500 text-xs mt-1 hidden" id="messageError"></span>
@@ -551,6 +532,37 @@
 <script src="js/sesion.js"></script>
 <script src="js/sesion-navbar.js"></script>
 <script src="js/theme.js"></script>
+
+
+<script>
+// Tema
+
+
+// Cerrar modal
+const modal = document.getElementById('dataModal');
+const closeModal = document.getElementById('closeModal');
+const closeModalX = document.getElementById('closeModalX');
+
+if (closeModal) {
+  closeModal.addEventListener('click', () => {
+    modal.classList.remove('active');
+  });
+}
+
+if (closeModalX) {
+  closeModalX.addEventListener('click', () => {
+    modal.classList.remove('active');
+  });
+}
+
+// Cerrar modal al hacer clic fuera
+modal?.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.classList.remove('active');
+  }
+});
+</script>
+
 
 
 <script>
