@@ -91,69 +91,86 @@
   <div class="shooting-star" style="top: 60%; left: -10%; animation-delay: 2.5s;"></div>
 </div>
 
-<!-- Header -->
-<header class="border-b border-slate-200 dark:border-emerald-800/60 bg-white/80 dark:bg-slate-950/80 sticky top-0 z-20 backdrop-blur">
-  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
-    <!-- Logo -->
-    <div class="flex items-center gap-2">
-      <div class="h-9 w-9 rounded-full overflow-hidden">
-  <img src="img/logo.jpg"
-       alt="Logo"
+  <!-- Header -->
+  <header class="border-b border-slate-200 dark:border-emerald-800/60 
+        bg-white/70 dark:bg-slate-950/70 sticky top-0 z-20 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+
+      <!-- Logo -->
+      <div class="flex items-center gap-2">
+        <div class="h-9 w-9 rounded-full overflow-hidden">
+        <img src="img/logo.jpg" 
+       alt="Logo" 
        class="h-full w-full object-cover">
 </div>
 
-      <div>
-        <h1 class="text-lg font-semibold text-emerald-700 dark:text-emerald-100">
-          EcoCampus<span class="text-emerald-500">CR</span>
-        </h1>
-        <p class="text-xs text-emerald-700/80 dark:text-emerald-200/80">
-          Convierte tu reciclaje en recompensas.
-        </p>
+        <div>
+          <h1 class="text-lg font-semibold text-emerald-700 dark:text-emerald-100 leading-none">
+            EcoCampus<span class="text-emerald-500">CR</span>
+          </h1>
+          <p class="text-[10px] text-emerald-700/70 dark:text-emerald-200/70 mt-[1px]">
+            Convierte tu reciclaje en recompensas
+          </p>
+        </div>
+      </div>
+
+      <!-- Navegación escritorio -->
+         <nav class="hidden md:flex items-center gap-5 text-sm font-medium">
+        <a href="index.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
+        <a href="acerca-de.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
+        <a href="contacto.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
+        <a href="dashboard-estudiante.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Dashboard</a>
+        <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
+          <a href="eventos.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Eventos</a>
+      </nav>
+
+
+      <!-- Derecha -->
+      <div class="flex items-center gap-2">
+
+        <!-- Sesión usuario -->
+        <div id="userSession" class="hidden md:flex items-center gap-2 bg-emerald-100/40 dark:bg-emerald-900/20 
+               px-2.5 py-1.5 rounded-full backdrop-blur-sm border border-emerald-300/40 dark:border-emerald-700/40">
+
+          <span id="userSessionName" class="text-sm font-semibold text-emerald-800 dark:text-emerald-100"></span>
+
+          <span id="userSessionPoints" class="text-[11px] px-2 py-0.5 rounded-full bg-white/70 dark:bg-slate-800/70 
+                     text-emerald-700 dark:text-emerald-300 font-semibold">
+            🌱 0
+          </span>
+
+          <button id="btnLogoutNav" class="text-[11px] px-2.5 py-1 rounded-full bg-red-500 text-white 
+                       hover:bg-red-600 transition font-semibold">
+            Salir
+          </button>
+        </div>
+
+        <!-- Login -->
+        <div id="loginPrompt">
+          <a href="autenticacion.html" class="hidden md:inline-block text-sm px-4 py-1.5 rounded-full bg-emerald-500 
+                  text-slate-950 font-semibold hover:bg-emerald-400 transition">
+            Iniciar Sesión
+          </a>
+        </div>
+
+        <!-- Botón tema -->
+        <button id="theme-toggle" class="p-2 rounded-full border border-slate-300 dark:border-slate-600 
+                     hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <span id="theme-toggle-light" class="hidden">☀️</span>
+          <span id="theme-toggle-dark">🌙</span>
+        </button>
+
+        <!-- Hamburguesa -->
+        <button id="menu-toggle" class="md:hidden p-2 rounded-full border border-slate-300 dark:border-slate-600 
+                     hover:bg-slate-100 dark:hover:bg-slate-800 transition text-lg">
+          ☰
+        </button>
+
       </div>
     </div>
 
-    <!-- Navegación escritorio -->
-    <nav class="hidden md:flex items-center gap-6 text-sm">
-      <a href="index.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
-      <a href="acerca-de.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
-      <a href="contacto.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
-      <a href="dashboard-estudiante.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Dashboard</a>
-      <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
-    </nav>
-
-    <!-- Área derecha -->
-    <div class="flex items-center gap-2">
-      <div class="hidden md:flex items-center gap-2 md:gap-3 bg-emerald-100/50 dark:bg-emerald-900/20 px-3 py-2 rounded-full backdrop-blur-sm" id="userSession">
-        <span class="text-sm font-semibold text-emerald-800 dark:text-emerald-100 whitespace-nowrap" id="userSessionName"></span>
-        <span class="text-xs px-3 py-1 rounded-full bg-white/80 dark:bg-slate-800/80 text-emerald-700 dark:text-emerald-300 font-semibold whitespace-nowrap" id="userSessionPoints">🌱 0</span>
-        <button class="text-xs px-3 py-1.5 rounded-full bg-red-500 text-white hover:bg-red-600 transition font-semibold whitespace-nowrap" id="btnLogoutNav">Salir</button>
-      </div>
-
-      <div id="loginPrompt">
-        <a href="autenticacion.html" class="hidden md:inline-block text-sm px-4 py-2 rounded-full bg-emerald-500 text-slate-950 font-semibold hover:bg-emerald-400 transition whitespace-nowrap">
-          Iniciar Sesión
-        </a>
-      </div>
-
-      <!-- Botón tema -->
-      <button id="theme-toggle"
-              class="p-2 rounded-full border border-slate-300 dark:border-slate-600 
-                     hover:bg-slate-100 dark:hover:bg-slate-800 transition">
-        <span id="theme-toggle-light" class="hidden">☀️</span>
-        <span id="theme-toggle-dark">🌙</span>
-      </button>
-
-      <!-- Botón hamburguesa (solo móvil) -->
-      <button id="menu-toggle"
-              class="md:hidden p-2 rounded-full border border-slate-300 dark:border-slate-600 
-                     hover:bg-slate-100 dark:hover:bg-slate-800 transition">
-        ☰
-      </button>
-    </div>
-  </div>
-
-<!-- Menú móvil -->
-<div id="mobile-menu" class="md:hidden hidden border-t border-slate-200 dark:border-emerald-800/60 
+    <!-- Menú móvil -->
+    <div id="mobile-menu" class="md:hidden hidden border-t border-slate-200 dark:border-emerald-800/60 
               bg-white/95 dark:bg-slate-950/95 shadow-lg">
 
       <div id="userSessionMobile" class="hidden flex-col gap-2 px-4 py-3 bg-emerald-100/40 dark:bg-emerald-900/20 
@@ -176,12 +193,13 @@
         </div>
       </div>
 
-      <nav class="px-4 py-3 flex flex-col gap-2 text-sm">
+   <nav class="px-4 py-3 flex flex-col gap-2 text-sm">
         <a href="index.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Inicio</a>
         <a href="acerca-de.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Acerca de</a>
         <a href="contacto.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Contacto</a>
         <a href="dashboard-estudiante.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Dashboard</a>
         <a href="blogs.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Publicaciones</a>
+          <a href="eventos.html" class="hover:text-emerald-500 dark:hover:text-emerald-300">Eventos</a>
 
         <a href="autenticacion.html" id="loginPromptMobile" class="mt-2 text-center text-sm px-4 py-2 rounded-full border border-emerald-500 
                 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/10 transition">
@@ -189,8 +207,7 @@
         </a>
       </nav>
     </div>
-</header>
-
+  </header>
 <!-- Main Content -->
 <main class="max-w-6xl mx-auto px-4 py-10">
   
