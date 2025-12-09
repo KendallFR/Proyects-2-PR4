@@ -254,12 +254,14 @@
   </main>
 
   <!-- Modal (debajo header) -->
-  <div id="eventModal" class="fixed inset-x-0 hidden items-start justify-center bg-black/60 px-4">
-    <div class="modal-inner bg-white dark:bg-slate-900 rounded-2xl max-w-3xl w-full p-6 border border-slate-200 dark:border-emerald-800/40">
-      <button id="closeEventModal" class="text-slate-400 hover:text-slate-600 float-right text-2xl">&times;</button>
-      <div id="eventModalContent" class="mt-3"></div>
-    </div>
+
+<!-- Modal (reemplazo: backdrop completo y modal centrado) -->
+<div id="eventModal" class="fixed inset-0 hidden items-center justify-center bg-black/60 backdrop-blur-sm px-4 z-50">
+  <div class="modal-inner modal-card bg-white dark:bg-slate-900 rounded-2xl max-w-3xl w-full p-6 border border-slate-200 dark:border-emerald-800/40 max-h-[85vh] overflow-y-auto">
+    <button id="closeEventModal" class="text-slate-400 hover:text-slate-600 float-right text-2xl">&times;</button>
+    <div id="eventModalContent" class="mt-3"></div>
   </div>
+</div>
 
 
 
@@ -321,6 +323,30 @@
 
     let currentCategory = 'all';
 
+
+// abrir modal (uso único)
+function openEventModal() {
+  eventModal.classList.remove('hidden');
+  eventModal.classList.add('flex');
+  document.body.classList.add('no-scroll');
+}
+
+// cerrar modal
+function closeModal() {
+  eventModal.classList.add('hidden');
+  eventModal.classList.remove('flex');
+  document.body.classList.remove('no-scroll');
+  eventModalContent.innerHTML = '';
+}
+
+/* listeners (colócalos también aquí, una vez) */
+closeEventModal?.addEventListener('click', closeModal);
+eventModal.addEventListener('click', (e) => {
+  if (e.target === eventModal) closeModal(); // cerrar si se clica fuera del panel
+});
+
+
+
     function renderAds(list){
       adsList.innerHTML = '';
       if(!list.length){
@@ -380,9 +406,12 @@
             </div>
           `;
           // mostrar modal (debajo header)
-          eventModal.classList.remove('hidden'); eventModal.classList.add('flex');
-          document.body.classList.add('no-scroll');
-          document.getElementById('closeModalBtn')?.addEventListener('click', closeModal);
+        // mostrar modal
+openEventModal();
+// El botón "Cerrar" dentro del modal (generado dinámicamente) debe enlazarse al cerrar:
+document.getElementById('closeModalBtn')?.addEventListener('click', closeModal);
+
+
         });
       });
 
